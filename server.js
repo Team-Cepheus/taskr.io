@@ -57,7 +57,6 @@ app.get('/deleteTask', async function(req, res) {
       var myquery = {"_id":ObjectId(req.query.id)};
       dbo.collection("tasks").deleteOne(myquery, function(err, obj) {
         if (err) throw err;
-        console.log(dbo.collection('tasks').findOne(req.query.url));
         res.end("1 document deleted");
         db.close();
       });
