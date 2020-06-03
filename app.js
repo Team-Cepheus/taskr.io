@@ -1,15 +1,31 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const userRoutes = require('./api/routes/users');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
+
+
+mongoose.connect('mongodb+srv://user:mongopassword@cluster0-d2zjl.mongodb.net/mydb?retryWrites=true&w=majority',{ useNewUrlParser: true,useUnifiedTopology: true })
+
+const userRoutes = require('./routes/users');
+const taskroute = require('./routes/tasks')
 
 app.use(morgan('dev'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/users',userRoutes);
-// app.use((req, res, next) => {
-//     res.status(200).json({
-//         message: 'Home Page',
-//     });
-// });
+app.use('/task',taskroute);
+
+
+
+
+app.get('/',(req,res)=>{
+    res.send('goto: <br /> /task for task <br /> /users for users')
+})
+
+
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');
