@@ -5,12 +5,13 @@ const userRoutes = require('./api/routes/users');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-app.use('/users',userRoutes);
 
-mongoose.connect('mongodb+srv://user:'+ process.env.MONGO_ATLAS_PW +'@cluster0-d2zjl.mongodb.net/test?retryWrites=true&w=majority',
-    {
-        useMongoClient: true
-    }
+mongoose.connect('mongodb+srv://user:'+ process.env.MONGO_ATLAS_PW +'@cluster0-d2zjl.mongodb.net/test?retryWrites=true&w=majority',{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true 
+}
+
 )
 
 app.use(morgan('dev'));
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 //         message: 'Home Page',
 //     });
 // });
+app.use('/users',userRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');
