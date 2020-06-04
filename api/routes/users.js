@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 const auth = require('../../middleware/auth')
 const User = require('../models/users');
 
@@ -29,7 +29,6 @@ router.post('/',(req, res, next) => {
     const user = User(req.body)
     user.save()
         .then(result => {
-            console.log(result);
             res.status(200).json({
                 message: 'Handling POST requests to /users.',
                 createdUser: result
@@ -62,18 +61,30 @@ router.get('/:userid',(req, res, next) => {
         });
 });
 
-router.post('/users/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
-        const user = await User.findByCredentials(req.body.email, req.body.password)
-        const token = await user.generateAuthToken()
-        res.send({ user, token })
+        //const user = await User.findOne({email:req.body.email})
+        //console.log(user);
+        //const token = await user.generateAuthToken()
+        //res.send({ user, token })
         // res.send(user)
+        const i = await User.findOne({email:req.body.email}).exec()
+        const istr = await bcrypt.compare(req.body.password,i['password']);
+        if(istr){
+            const token = await i.generateAuthToken();
+            res.send({token});
+        }
+        else{
+            res.status(401).send('invalid password')
+        }
+
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.post('/users/logout', auth, async (req, res) => {
+router.post('/logout', auth, async (req, res) => {
+
     try {
         req.user.tokens = req.user.tokens.filter(
             (token) => token.token != req.token
