@@ -8,6 +8,8 @@ const CompletedColumn = () => {
                 <h3>COMPLETED</h3>
                 <button className="add-btn">+</button>
             </div>
+            <div className="rule comp"></div>
+
         </div>
     );
 }

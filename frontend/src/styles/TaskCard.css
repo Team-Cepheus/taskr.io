@@ -1,0 +1,30 @@
+.task-card {
+    background-color: #2f3039;
+    padding: 1rem;
+    border-radius: 10px;
+}
+.task-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #ffffff !important;
+}
+
+.timestamp {
+    margin-left: 10px;
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+.task-attributes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.task-attributes p {
+    color: #ffffffb4;
+}
+
+.task-attributes span {
+    color: #14ffec;
+}

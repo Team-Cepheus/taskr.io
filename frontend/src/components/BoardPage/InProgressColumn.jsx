@@ -7,6 +7,8 @@ const InProgressColumn = () => {
                 <h3>IN PROGRESS</h3>
                 <button className="add-btn">+</button>
             </div>
+            <div className="rule inprog"></div>
+
         </div>
      );
 }

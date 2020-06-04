@@ -4,7 +4,8 @@ import Topbar from '../Topbar'
 import TodoColumn from './TodoColumn';
 import '../../styles/BoardPage.css'
 import InProgressColumn from './InProgressColumn';
-import CompletedColumn from './CompletedColumn'
+import CompletedColumn from './CompletedColumn';
+import TaskCard from './TaskCard';
 
 const BoardPage = () => {
     return ( 
@@ -12,7 +13,9 @@ const BoardPage = () => {
         <Topbar/>
         <Sidebar />
         <div className="board">
-        <TodoColumn/>  
+        <TodoColumn>
+            <TaskCard/>
+        </TodoColumn>  
         <InProgressColumn/>
         <CompletedColumn />
         </div>

@@ -20,3 +20,7 @@ body {
 button {
   border: none;
 }
+
+h3, p{
+  margin: 0;
+}
