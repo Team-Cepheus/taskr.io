@@ -1,8 +1,17 @@
 /* --------GLOBAL STYLES-------- */
 
+
+* {
+  box-sizing: border-box;
+  color: white;
+}
+
 body {
   margin: 0;
+  height: 100vh;
   font-family: "Poppins", sans-serif;
+  font-size: 62.5%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
 }

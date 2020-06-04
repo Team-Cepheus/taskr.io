@@ -1,0 +1,90 @@
+.login-page {
+    background-image: url('/static/loginpage-bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.brand-title{
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+}
+
+.brand-title span {
+    opacity: 0.5;
+    margin: 0;
+}
+
+.brand-title--subtitle{
+    color: #ffffff94;
+    margin: 0;
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+
+}
+
+.login-buttons {
+    margin: 1rem 0;
+}
+
+.login-buttons button {
+    border: none;
+    padding: 0.5rem;
+    background-color: #25262E;
+    margin: 1rem 0;
+    font-weight: 600;
+}
+
+.login-buttons button:last-child{
+    margin-left: 1rem;
+}
+
+.login-form {
+    background-color: #1B1B21;
+    padding: 4rem 5rem ;
+    width: 28rem;
+}
+
+.login-page input {
+    text-align: left;
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    /* box-shadow: none; */
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.5rem 0.5rem 0.25rem 0;
+    letter-spacing: 0.05em;
+    background-color: transparent;
+}
+
+.login-page input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+
+}
+
+
+.login-form form {
+    padding: 0 1rem;
+    text-align: left;
+}
+
+.login-form form button {
+    background-color: #0D7377 ;
+    font-weight: bold;
+    border: none !important;
+    box-shadow: none;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    outline: none;
+}
