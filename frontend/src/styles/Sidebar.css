@@ -1,0 +1,55 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: calc(100vh - 3.95rem);
+    width: 10rem;
+    background-color: #25262e;
+    z-index: -1;
+    align-items: left;
+    padding: 0 1rem;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 60px;
+    height: auto;
+    margin-top: 1rem;
+}
+
+.profile {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile h3 {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+.profile p {
+    margin-top: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.workspaces{
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.workspaces h3 {
+    font-weight: 500;
+    color: #14ffec;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.add button {
+    border: none;
+    border-radius: 100%;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    background-color: #2F3039;
+}
