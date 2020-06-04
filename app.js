@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const userRoutes = require('./api/routes/users');
+const taskroute = require('./api/routes/tasks')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -27,13 +28,14 @@ app.use((req, res, next) => {
     }
     next();
 });
-
-// app.use((req, res, next) => {
-//     res.status(200).json({
-//         message: 'Home Page',
-//     });
-// });
 app.use('/users',userRoutes);
+app.use('/task',taskroute);
+
+
+app.get('/',(req,res)=>{
+    res.send('goto: <br /> /task for task <br /> /users for users');
+})
+
 
 app.use((req, res, next) => {
     const error = new Error('Not Found');
