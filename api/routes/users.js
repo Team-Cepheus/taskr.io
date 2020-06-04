@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-
+const auth = require('../../middleware/auth')
 const User = require('../models/users');
 
 router.get('/',(req, res, next) => {
@@ -26,11 +26,7 @@ router.get('/',(req, res, next) => {
 });
 
 router.post('/',(req, res, next) => {
-    const user = new User({
-        name: req.body.name,
-        username: req.body.username,
-        email: req.body.email
-    });
+    const user = User(req.body)
     user.save()
         .then(result => {
             console.log(result);
@@ -66,26 +62,28 @@ router.get('/:userid',(req, res, next) => {
         });
 });
 
-// router.get('/:username',(req, res, next) => {
-//     const uname  =  req.params.username;
-//     User.find({username : uname})
-//         .exec()
-//         .then(doc => {
-//             console.log(doc);
-//             if(doc){
-//                 res.status(200).json(doc);
-//             }
-//             else {
-//                 res.status(404).json({"message" : "User not found"});
-//             }
-            
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.status(500).json({"error" : err})
-//         });
-// });
+router.post('/users/login', async (req, res) => {
+    try {
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        const token = await user.generateAuthToken()
+        res.send({ user, token })
+        // res.send(user)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
 
+router.post('/users/logout', auth, async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter(
+            (token) => token.token != req.token
+        )
+        await req.user.save()
+        res.send()
+    } catch (e) {
+        res.status(500).send()
+    }
+})
 
 
 module.exports = router;
