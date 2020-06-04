@@ -4,3 +4,11 @@ In the project directory do
 -`yarn install` then
 
 -`yarn start`
+
+## Routes
+```
+/
+/dashboard
+/board
+
+```
