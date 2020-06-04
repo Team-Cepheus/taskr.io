@@ -10,9 +10,9 @@ const Sidebar = () => {
                 <p>janedoe@gmail.com</p>
             </div>
             <div className="workspaces">
-                <div className="add">
+                <div>
                 <h3>WORKSPACES</h3>
-                <button>+</button>
+                <button className="add-btn">+</button>
                 </div>
             </div>
 

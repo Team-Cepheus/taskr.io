@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginPage from './components/Login/LoginPage';
 import DashboardPage from './components/DashboardPage';
-import BoardPage from './components/BoardPage';
+import BoardPage from './components/BoardPage/BoardPage';
 
 
 function App() {
