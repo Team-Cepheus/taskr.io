@@ -15,6 +15,11 @@ const BoardPage = () => {
         <div className="board">
         <TodoColumn>
             <TaskCard/>
+            <TaskCard/>
+            <TaskCard/>
+            <TaskCard/>
+            <TaskCard/>
+
         </TodoColumn>  
         <InProgressColumn/>
         <CompletedColumn />

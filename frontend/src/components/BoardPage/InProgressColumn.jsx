@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InProgressColumn = () => {
+const InProgressColumn = (props) => {
     return ( 
         <div className="inprogresscol">
             <div className="add-task">
@@ -8,7 +8,9 @@ const InProgressColumn = () => {
                 <button className="add-btn">+</button>
             </div>
             <div className="rule inprog"></div>
-
+            <div className="tasks">
+                {props.children}
+            </div>
         </div>
      );
 }

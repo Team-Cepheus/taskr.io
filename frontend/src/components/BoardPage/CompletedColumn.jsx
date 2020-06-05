@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const CompletedColumn = () => {
+const CompletedColumn = (props) => {
     return (
         <div className="completedcol">
             <div className="add-task">
@@ -9,7 +9,9 @@ const CompletedColumn = () => {
                 <button className="add-btn">+</button>
             </div>
             <div className="rule comp"></div>
-
+            <div className="tasks">
+                {props.children}
+            </div>
         </div>
     );
 }

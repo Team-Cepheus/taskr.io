@@ -9,7 +9,10 @@ const TodoColumn = (props) => {
                 <button className="add-btn">+</button>
             </div>
             <div className="rule todo"></div>
-            {props.children}
+            <div className="tasks">
+                {props.children}
+            </div>
+
         </div>
     );
 }

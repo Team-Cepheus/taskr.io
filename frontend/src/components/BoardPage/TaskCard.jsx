@@ -2,11 +2,11 @@ import React from 'react';
 import '../../styles/TaskCard.css'
 
 const TaskCard = () => {
-    return ( 
+    return (
         <div className="task-card">
             <div>
-            <h3 className="task-title">Task tile</h3>
-            <span className="timestamp">20 May</span>
+                <h3 className="task-title">Task tile</h3>
+                <span className="timestamp">20 May</span>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fermentum diam non tortor finibus    </p>
             <div className="task-attributes">
@@ -15,7 +15,7 @@ const TaskCard = () => {
             </div>
         </div>
 
-     );
+    );
 }
- 
+
 export default TaskCard;

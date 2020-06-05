@@ -17,7 +17,18 @@
     padding: 0 1.5rem;
     display: flex;
     flex-direction: column;
+    
 }
+
+.tasks { 
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.tasks::-webkit-scrollbar {
+    display: none;
+}
+
 .todocol,
 .inprogresscol {
     border-right: 1px solid #ffffff1a;
