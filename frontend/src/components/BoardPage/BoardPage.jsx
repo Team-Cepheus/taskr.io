@@ -6,26 +6,32 @@ import '../../styles/BoardPage.css'
 import InProgressColumn from './InProgressColumn';
 import CompletedColumn from './CompletedColumn';
 import TaskCard from './TaskCard';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const BoardPage = () => {
-    return ( 
-    <div>
-        <Topbar/>
-        <Sidebar />
-        <div className="board">
-        <TodoColumn>
-            <TaskCard/>
-            <TaskCard/>
-            <TaskCard/>
-            <TaskCard/>
-            <TaskCard/>
 
-        </TodoColumn>  
-        <InProgressColumn/>
-        <CompletedColumn />
+    const onDragEnd = (result) => {
+        //TODO: implement dragging logic
+        const { dest, source, draggableId } = result;
+        if(!dest) {
+            return
+        }
+
+    }
+
+    return (
+        <div>
+            <Topbar />
+            <Sidebar />
+            <DragDropContext onDragEnd={onDragEnd}>
+                <div className="board">
+                    <TodoColumn/>
+                    <InProgressColumn />
+                    <CompletedColumn />
+                </div>
+            </DragDropContext>
         </div>
-    </div> 
     );
 }
- 
+
 export default BoardPage;
