@@ -1,4 +1,5 @@
 import React from 'react';
+import AddTaskForm from '../AddTaskForm';
 
 
 const CompletedColumn = (props) => {
@@ -6,7 +7,7 @@ const CompletedColumn = (props) => {
         <div className="completedcol">
             <div className="add-task">
                 <h3>COMPLETED</h3>
-                <button className="add-btn">+</button>
+                <AddTaskForm/>
             </div>
             <div className="rule comp"></div>
             <div className="tasks">

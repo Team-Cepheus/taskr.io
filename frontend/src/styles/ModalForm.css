@@ -10,18 +10,18 @@
     justify-content: center;
   }
 
-.addtask-modal {
+.form-modal {
     background-color: #1B1B21;
     padding: 2rem;
     outline: none;
     border-radius: 5px;
 }
-.addtask-modal form {
+.form-modal form {
     display: flex;
     flex-direction: column;
 }
 
-.addtask-modal input, textarea{
+.form-modal input, textarea{
     font-family: inherit;
     font-weight: 300;
     background-color: #2F3039;
@@ -32,9 +32,19 @@
     resize: vertical;
 }
 
-.addtask-modal .btn {
+.form-modal .btn {
     font-family: inherit;
     border-radius: 3px;
     font-weight: 700;
     font-size: 0.75rem;
+}
+
+.add-input {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.remove-input{
+    background-color: #D72323;
+    padding: 0.5rem 0.75rem;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import '../styles/AddTaskForm.css';
+import '../styles/ModalForm.css';
 
 
 const AddTaskForm = () => {
@@ -17,17 +17,16 @@ const AddTaskForm = () => {
             <button className="add-btn" onClick={toggleModal}>+</button>
             <Modal
                 ariaHideApp={false}
-                className="addtask-modal"
+                className="form-modal"
                 overlayClassName="Overlay"
                 isOpen={isOpen}
-                contentLabel="modalB"
                 shouldCloseOnOverlayClick={true}
                 onRequestClose={toggleModal}
                 aria={{
                     labelledby: "Add Task Form"
                 }}>
 
-                <div className="add-task-form">
+                <div className="add-form">
                     <form action="">
                         <label htmlFor="taskTitle">Title</label>
                         <input type="text" name="" id="taskTitle" placeholder="Task title" />

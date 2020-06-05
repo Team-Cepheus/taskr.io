@@ -1,11 +1,12 @@
 import React from 'react';
+import AddTaskForm from '../AddTaskForm';
 
 const InProgressColumn = (props) => {
     return ( 
         <div className="inprogresscol">
             <div className="add-task">
                 <h3>IN PROGRESS</h3>
-                <button className="add-btn">+</button>
+                <AddTaskForm/>
             </div>
             <div className="rule inprog"></div>
             <div className="tasks">

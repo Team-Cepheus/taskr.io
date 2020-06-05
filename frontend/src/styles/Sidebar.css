@@ -7,7 +7,6 @@
     height: calc(100vh - 3.95rem);
     width: 10rem;
     background-color: #25262e;
-    z-index: -1;
     align-items: left;
     padding: 0 1rem;
 }

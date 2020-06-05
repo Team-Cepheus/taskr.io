@@ -7,7 +7,6 @@ const TodoColumn = (props) => {
         <div className="todocol">
             <div className="add-task">
                 <h3>TO-DO</h3>
-              
                 <AddTaskForm/>
             </div>
             <div className="rule todo"></div>

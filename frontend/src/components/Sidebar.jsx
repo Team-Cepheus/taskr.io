@@ -1,5 +1,6 @@
 import React from 'react';
-import '../styles/Sidebar.css'
+import '../styles/Sidebar.css';
+import AddWorkspaceForm from './AddWorkspaceForm';
 
 const Sidebar = () => {
     return (
@@ -12,7 +13,7 @@ const Sidebar = () => {
             <div className="workspaces">
                 <div>
                 <h3>WORKSPACES</h3>
-                <button className="add-btn">+</button>
+                <AddWorkspaceForm/>
                 </div>
             </div>
 
