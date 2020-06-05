@@ -1,4 +1,5 @@
 import React from 'react';
+import AddTaskForm from '../AddTaskForm';
 
 
 const TodoColumn = (props) => {
@@ -6,7 +7,8 @@ const TodoColumn = (props) => {
         <div className="todocol">
             <div className="add-task">
                 <h3>TO-DO</h3>
-                <button className="add-btn">+</button>
+              
+                <AddTaskForm/>
             </div>
             <div className="rule todo"></div>
             <div className="tasks">

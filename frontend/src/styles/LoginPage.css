@@ -78,7 +78,7 @@
     text-align: left;
 }
 
-.login-form form button {
+ .btn {
     background-color: #0D7377 ;
     font-weight: bold;
     border: none !important;

@@ -5,7 +5,7 @@ const LoginForm = () => {
         <form action="">
             <input type="text" placeholder="Username" />
             <input type="password" name="" placeholder="Password" />
-            <button type="submit">LOGIN</button>
+            <button className="btn" type="submit">LOGIN</button>
         </form>
     );
 }

@@ -7,7 +7,7 @@ const SignupForm = () => {
             <input type="text" placeholder="Username" />
             <input type="email" placeholder="Email" />
             <input type="password" name="" placeholder="Password" />
-            <button type="submit">SIGN UP</button>
+            <button className="btn" type="submit">SIGN UP</button>
         </form>
      );
 }
