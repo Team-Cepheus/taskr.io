@@ -10,4 +10,4 @@ const taskSchema = mongoose.Schema({
     modified: {type:Boolean, default:false}
 });
 
-module.exports = mongoose.model('task',taskSchema);
+module.exports = mongoose.model('Tasks',taskSchema);

@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const userRoutes = require('./api/routes/users');
-const taskroute = require('./api/routes/tasks')
+const taskroute = require('./api/routes/tasks');
+const workspaceroute = require('./api/routes/workspace');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -12,7 +13,6 @@ mongoose.connect('mongodb+srv://user:'+ process.env.MONGO_ATLAS_PW +'@cluster0-d
     useUnifiedTopology: true,
     useCreateIndex: true 
 }
-
 )
 
 app.use(morgan('dev'));
@@ -28,9 +28,10 @@ app.use((req, res, next) => {
     }
     next();
 });
+
 app.use('/users',userRoutes);
 app.use('/task',taskroute);
-
+app.use('/workspace',workspaceroute);
 
 app.get('/',(req,res)=>{
     res.send('goto: <br /> /task for task <br /> /users for users');
