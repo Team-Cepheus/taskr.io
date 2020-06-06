@@ -1,5 +1,5 @@
 const workspaceRouter = require('express').Router();
-const Workspace = require('../models/workspace');
+const Workspace = require('../api/workspace');
 
 // Get all workspaces
 workspaceRouter.get('/', async(req, res) => {
