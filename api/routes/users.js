@@ -29,7 +29,7 @@ router.post('/',(req, res, next) => {
     const user = User(req.body)
     user.save()
         .then(result => {
-            res.status(200).json({
+            res.status(201).json({
                 message: 'Handling POST requests to /users.',
                 createdUser: result
             });
