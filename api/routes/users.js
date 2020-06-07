@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt')
+const Workspace = require("../models/workspace");
 const auth = require('../../middleware/auth')
 const User = require('../models/users');
 
-router.get('/',(req, res, next) => {
+router.get('/', auth, (req, res, next) => {
     let dBQuery = User.find();
     if (req.query.username) {
         const uname = req.query.username;
         dBQuery = User.find({username : uname});
     }
     dBQuery
+    .select('name username email')
     .exec()
     .then(docs => {
         console.log(docs);
@@ -25,6 +27,22 @@ router.get('/',(req, res, next) => {
     // })
 });
 
+router.get('/workspaces', auth, (req, res, next) => {
+    let dBQuery = Workspace.find({"users" : ObjectId(req.user._id)});
+    dBQuery
+    .exec()
+    .then(docs => {
+        console.log(docs);
+        res.status(200).json(docs);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({"error" : err})
+    });
+    // res.status(200).json({
+    //     message: 'Handling GET requests to /users.'
+    // })
+});
 router.post('/',(req, res, next) => {
     const user = User(req.body)
     user.save()
@@ -41,7 +59,7 @@ router.post('/',(req, res, next) => {
     
 });
 
-router.get('/:userid',(req, res, next) => {
+router.get('/:userid', auth, (req, res, next) => {
     const id  =  req.params.userid;
     User.findById(id)
         .exec()
