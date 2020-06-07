@@ -28,7 +28,7 @@ router.get('/', auth, (req, res, next) => {
 });
 
 router.get('/workspaces', auth, (req, res, next) => {
-    let dBQuery = Workspace.find({"users" : ObjectId(req.user._id)});
+    let dBQuery = Workspace.find({"users" : req.user_id});
     dBQuery
     .exec()
     .then(docs => {
@@ -47,7 +47,8 @@ router.post('/',(req, res, next) => {
     const user = User(req.body)
     user.save()
         .then(result => {
-            res.status(201).json({
+            console.log(result)
+            res.status(200).json({
                 message: 'Handling POST requests to /users.',
                 createdUser: result
             });
@@ -62,6 +63,7 @@ router.post('/',(req, res, next) => {
 router.get('/:userid', auth, (req, res, next) => {
     const id  =  req.params.userid;
     User.findById(id)
+        .select('name username email')
         .exec()
         .then(doc => {
             console.log(doc);
