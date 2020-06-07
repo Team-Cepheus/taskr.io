@@ -92,11 +92,11 @@ router.route("/:workspaceID/addTask/:taskID").patch(async (req, res) => {
   }
 });
 
-router.route("/:workshopID/addUser/:UserID")
+router.route("/:workspaceID/addUser/:UserID")
 .patch(async (req, res) => {
   var wexist = await workspace.exists({ _id: req.params.workspaceID });
   var uexist = await User.exists({ _id: req.params.UserID });
-
+  console.log(wexist,uexist)
   if (wexist && uexist) {
     const w = await workspace.findById(req.params.workspaceID).exec();
     w.users.push(req.params.UserID);
