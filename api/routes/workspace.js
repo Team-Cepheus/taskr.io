@@ -71,19 +71,23 @@ router
 
 router
   .route('/:workspaceID/addTask/:taskID')
-  .post(async (req, res) => {
+  .patch(async (req, res) => {
     var wexist = await workspace.exists({ _id: req.params.workspaceID })
     var texist = await Task.exists({_id: req.params.taskID})
     
     if(wexist && texist){
       const w = await workspace.findById(req.params.workspaceID).exec();
-      
       w.tasks.push(req.params.taskID);
-      w.save();
-      res.send(200)
-
+      w.save().then(result=>{
+        res.status(200).json(result)
+      })
+      .catch(err=>{
+        res.status(500).json(err)
+      })
     }
-
+    else{
+      res.sendStatus(400);
+    }
   })
 
 
