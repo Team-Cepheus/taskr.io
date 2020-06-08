@@ -2,11 +2,12 @@ const express = require("express");
 let router = express.Router();
 const mongoose = require("mongoose");
 const task = require("../models/tasks");
+const auth=require("../../middleware/auth.js");
 
 router
   .route("/")
 
-  .get((req, res) => {
+  .get(auth,(req, res) => {
     task
       .find()
       .exec()
@@ -17,7 +18,7 @@ router
         res.status(500).json(err);
       });
   })
-  .post((req, res) => {
+  .post(auth,(req, res) => {
     const newtask = new task({
       // _id: mongoose.Types.ObjectId(),
       createdOn: new Date().toISOString(),
@@ -42,7 +43,7 @@ router
 router
   .route("/:taskID")
 
-  .get((req, res) => {
+  .get(auth,(req, res) => {
     const id = req.params.taskID;
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
       // if it's a valid ObjectId format , proceed with `findById` call otherwise will give an error if simple text is sent
@@ -60,7 +61,7 @@ router
       res.status(500).json(null);
     }
   })
-  .patch((req, res) => {
+  .patch(auth,(req, res) => {
     const id = req.params.taskID;
     const updatetask = {};
     for (const tsk of req.body) {
@@ -77,7 +78,7 @@ router
         res.status(500).json(err);
       });
   })
-  .delete((req, res) => {
+  .delete(auth,(req, res) => {
     const id = req.params.taskID;
     task
       .remove({ _id: id })
@@ -93,7 +94,7 @@ router
 
 router
   .route("/:taskID/:status")
-  .patch((req,res)=>{
+  .patch(auth,(req,res)=>{
     const id = req.params.taskID;
     const stat = req.params.status;
     console.log(id,stat)
