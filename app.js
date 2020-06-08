@@ -7,6 +7,7 @@ const workspaceroute = require('./api/routes/workspace');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+
 console.log(process.env.MONGO_ATLAS_PW);
 mongoose.connect('mongodb+srv://user:'+ process.env.MONGO_ATLAS_PW +'@cluster0-d2zjl.mongodb.net/test?retryWrites=true&w=majority',{
     useNewUrlParser: true,

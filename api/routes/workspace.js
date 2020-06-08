@@ -4,11 +4,12 @@ const Workspace = require("../models/workspace");
 const mongoose = require("mongoose");
 const Task = require("../models/tasks");
 const User = require("../models/users");
+const auth=require("../../middleware/auth.js");
 
 router
   .route("/")
 
-  .get((req, res) => {
+  .get(auth,(req, res) => {
     Workspace
       .find()
       .populate("tasks")
@@ -22,7 +23,7 @@ router
       });
   })
 
-  .post((req, res) => {
+  .post(auth,(req, res) => {
     const workSpace = new Workspace({
       // _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
@@ -45,9 +46,9 @@ router
   });
 
 router
-  .route("/:workspaceID")
+  .route("/:workspaceID",auth)
 
-  .get((req, res) => {
+  .get(auth,(req, res) => {
     Workspace
       .findById(req.params.workspaceID)
       .exec()
@@ -67,8 +68,8 @@ router
   })
 
 
-router.route("/workspaceTask")
-  .patch(async (req, res) => {
+router.route("/workspaceTask",auth)
+  .patch(auth,async (req, res) => {
     var wexist = await Workspace.exists({ _id: req.body.workspaceID });
     var texist = await Task.exists({ _id: req.body.taskID });
 
@@ -86,7 +87,7 @@ router.route("/workspaceTask")
       res.sendStatus(400);
     }
   })
-  .delete(async (req, res) => {
+  .delete(auth,async (req, res) => {
     var wexist = await Workspace.exists({ _id: req.body.workspaceID });
     if (wexist) {
       const w = await Workspace.findById(req.body.workspaceID).exec();
@@ -105,8 +106,8 @@ router.route("/workspaceTask")
     }
   })
 
-router.route("/workspaceUser")
-  .patch(async (req, res) => {
+router.route("/workspaceUser",auth)
+  .patch(auth,async (req, res) => {
     var wexist = await Workspace.exists({ _id: req.body.workspaceID });
     var uexist = await User.exists({ _id: req.body.userID });
     if (wexist && uexist) {
@@ -123,7 +124,7 @@ router.route("/workspaceUser")
       res.sendStatus(400);
     }
   })
-  .delete(async (req, res) => {
+  .delete(auth,async (req, res) => {
     var wexist = await Workspace.exists({ _id: req.body.workspaceID });
     if (wexist) {
       const w = await Workspace.findById(req.body.workspaceID).exec();
