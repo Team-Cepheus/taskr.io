@@ -47,9 +47,9 @@ router.post('/',(req, res, next) => {
     const user = User(req.body)
     user.save()
         .then(result => {
-            console.log(result)
-            res.status(200).json({
-                message: 'Handling POST requests to /users.',
+            // console.log(result)
+            res.status(201).json({
+                message: 'Successfully Created a User',
                 createdUser: result
             });
         })
