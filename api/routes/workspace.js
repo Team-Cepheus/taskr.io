@@ -109,7 +109,6 @@ router.route("/workspaceUser")
   .patch(async (req, res) => {
     var wexist = await Workspace.exists({ _id: req.body.workspaceID });
     var uexist = await User.exists({ _id: req.body.userID });
-    console.log(wexist, uexist)
     if (wexist && uexist) {
       const w = await Workspace.findById(req.body.workspaceID).exec();
       w.users.push(req.body.userID);

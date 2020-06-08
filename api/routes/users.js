@@ -29,6 +29,7 @@ router.get('/', auth, (req, res, next) => {
 
 router.get('/workspaces', auth, (req, res, next) => {
     let dBQuery = Workspace.find({"users" : req.user_id});
+    console.log(dBQuery)
     dBQuery
     .exec()
     .then(docs => {
@@ -48,9 +49,11 @@ router.post('/',(req, res, next) => {
     user.save()
         .then(result => {
             // console.log(result)
+            const token = user.generateAuthToken();
             res.status(201).json({
                 message: 'Successfully Created a User',
-                createdUser: result
+                createdUser: result,
+                Token : token
             });
         })
         .catch(err => {
