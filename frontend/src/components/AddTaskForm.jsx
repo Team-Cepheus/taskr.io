@@ -20,6 +20,7 @@ const AddTaskForm = () => {
                 className="form-modal"
                 overlayClassName="Overlay"
                 isOpen={isOpen}
+                closeTimeoutMS={500}
                 shouldCloseOnOverlayClick={true}
                 onRequestClose={toggleModal}
                 aria={{
