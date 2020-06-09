@@ -37,9 +37,9 @@
 .login-buttons button {
     border: none;
     padding: 0.5rem;
-    background-color: #25262E;
     margin: 1rem 0;
     font-weight: 600;
+    background-color: transparent;
 }
 
 .login-buttons button:last-child{
@@ -87,4 +87,12 @@
     margin-top: 1rem;
     font-size: 0.8rem;
     outline: none;
+}
+
+.active{
+    background-color: #25262E !important;
+}
+
+.error-text {
+    color: #D72323;
 }
