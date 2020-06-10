@@ -51,6 +51,8 @@ router
   .get(auth,(req, res) => {
     Workspace
       .findById(req.params.workspaceID)
+      .populate("tasks")
+      .populate("users", ["name", "username"])
       .exec()
       .then((workspace) => {
 
