@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { config } from '../../config';
 import { authorize, setAuthData } from '../../redux/auth_actions';
 import { useHistory } from 'react-router-dom';
+import useCheckAuth from '../../helpers/checkAuth';
 
 const LoginForm = () => {
 
@@ -12,6 +12,8 @@ const LoginForm = () => {
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const history = useHistory()
+
+    useCheckAuth()
 
     const onSubmit = (e) => {
         e.preventDefault();

@@ -1,11 +1,11 @@
 
 export const authorize = () => ({
-    'type': 'AUTHORIZE'
+    type: 'AUTHORIZE'
 });
 export const unauthorize = () => ({
-    'type': 'UNAUTHORIZE'
+    type: 'UNAUTHORIZE'
 });
 export const setAuthData = (data) => ({
-    'type': 'SET_AUTH_DATA',
-    'authData': data,
+    type: 'SET_AUTH_DATA',
+    authData: data,
 });

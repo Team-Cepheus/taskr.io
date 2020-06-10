@@ -20,6 +20,7 @@
 
 .profile {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    word-wrap: break-word;
 }
 
 .profile h3 {
@@ -50,5 +51,28 @@
     border-radius: 100%;
     font-size: 0.75rem;
     padding: 0.4rem 0.6rem;
+    background-color: #2F3039;
+}
+
+.logout-btn {
+    background-color: transparent;
+    color: #ffffffa4;
+    text-decoration: underline;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+
+.logout-btn:hover {
+    color: #ffffff;
+}
+
+.workspace-btn {
+    background-color: transparent;
+    font-weight: 400;
+    width: 100%;
+}
+
+.active-w {
     background-color: #2F3039;
 }

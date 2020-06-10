@@ -1,16 +1,28 @@
-import authReducer from './authReducer'
+import authReducer from './authReducer';
+import userReducer from './userReducer';
 import { createStore, combineReducers } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
+const persistConfig = {
+    key: 'root',
+    storage,
+}
 
 const rootReducer = combineReducers({
-    authReducer
+    authReducer,
+    userReducer
 })
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 
 export default () => {
     const store = createStore(
-        
-        rootReducer,
-        window['__REDUX_DEVTOOLS_EXTENSION__ ']&& window['__REDUX_DEVTOOLS_EXTENSION__']()   
+        persistedReducer,
+        window['__REDUX_DEVTOOLS_EXTENSION__ '] && window['__REDUX_DEVTOOLS_EXTENSION__']()
     );
-    return store;
+    let persistor = persistStore(store);
+
+    return { store, persistor };
 }

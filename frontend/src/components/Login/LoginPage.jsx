@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../../styles/LoginPage.css';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
@@ -6,7 +6,6 @@ import SignupForm from './SignupForm';
 const LoginPage = () => {
 
     const [login, setLogin] = useState(true)
-
 
     return (
         <div className="login-page">

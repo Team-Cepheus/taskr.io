@@ -3,7 +3,7 @@ import AddTaskForm from '../AddTaskForm';
 import { Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard'
 
-const TodoColumn = () => {
+const TodoColumn = ({ todo }) => {
     return (
 
         <div className="todocol">
@@ -19,10 +19,8 @@ const TodoColumn = () => {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-                            <TaskCard id={1} />
-                            <TaskCard id={2} />
-                            <TaskCard id={3} />
-                            <TaskCard id={4} />
+                            {todo ? todo.map((task, i) => <TaskCard data={task} id={i} key={i} />): ''}
+                            
                             {provided.placeholder}
                         </div>
                 )}

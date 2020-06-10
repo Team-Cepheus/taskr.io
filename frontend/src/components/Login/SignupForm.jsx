@@ -6,7 +6,6 @@ import { authorize, setAuthData } from '../../redux/auth_actions';
 
 
 const SignupForm = () => {
-
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');

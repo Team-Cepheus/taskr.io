@@ -4,6 +4,13 @@
     border-radius: 10px;
     margin-bottom: 1rem;
 }
+
+.task-card > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 .task-title {
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -11,7 +18,6 @@
 }
 
 .timestamp {
-    margin-left: 10px;
     opacity: 0.5;
     font-weight: 300;
 }

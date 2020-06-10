@@ -2,8 +2,11 @@ import React from 'react';
 import Topbar from './Topbar';
 import Sidebar from './Sidebar';
 import '../styles/DashboardPage.css'
+import useCheckAuth from '../helpers/checkAuth';
 
 const DashboardPage = () => {
+    useCheckAuth()
+
     return ( 
         <>
             <Topbar/>

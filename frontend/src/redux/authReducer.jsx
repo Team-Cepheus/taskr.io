@@ -1,17 +1,16 @@
-const authReducerDefaultState = {
+const authDefaultState = {
     authenticated: false,
-    user: null,
-    isLoading: null
+    user: null
 }
 
-const authReducer = (state = authReducerDefaultState, action) => {
+const authReducer = (state = authDefaultState, action) => {
     switch(action.type) {
         case 'AUTHORIZE':
             return {
                 ...state,
                 authenticated: true
             }
-        
+    
         case 'UNAUTHORIZE':
             return {
                 ...state,
@@ -23,7 +22,6 @@ const authReducer = (state = authReducerDefaultState, action) => {
                 user: action.authData
             }
 
-        
         default: 
             return state
     }

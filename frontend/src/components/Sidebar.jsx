@@ -1,21 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Sidebar.css';
 import AddWorkspaceForm from './AddWorkspaceForm';
+import { useSelector, useDispatch } from 'react-redux';
+import { unauthorize, setAuthData } from '../redux/auth_actions';
+import { useHistory } from 'react-router-dom';
+import { config } from '../config';
+import usefetchData from '../helpers/fetchData';
+import { setWorkspaces, setCurrentWorkspace } from '../redux/user_actions';
 
 const Sidebar = () => {
+    const userData = useSelector((state) => state.authReducer.user);
+    const currentWorkspace = useSelector((state) => state.userReducer.currentWorkspace)
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const workspaceData = usefetchData('users/workspaces', 'GET');
+
+    useEffect(() => {
+        if(workspaceData){
+            dispatch(setWorkspaces(workspaceData));
+            dispatch(setCurrentWorkspace(0));
+            history.push('/board');
+        }
+    }, [workspaceData]);
+
+    const logout = async () => {
+        const token = JSON.parse(window.localStorage.getItem('auth')).value.token;
+        const response = await fetch(`${config.apiURL}/users/logout`, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+
+            },
+        });
+        console.log(response);
+    }
+
+
     return (
         <div className="sidebar">
             <div className="profile">
                 <img className="avatar" src="/static/avatars/2.png" alt="" />
-                <h3>Jane Doe</h3>
-                <p>janedoe@gmail.com</p>
+                <h3>{userData !== undefined ? userData.value.user.name : ''}</h3>
+                <p>{userData !== undefined ? userData.value.user.email : ''}</p>
             </div>
             <div className="workspaces">
                 <div>
-                <h3>WORKSPACES</h3>
-                <AddWorkspaceForm/>
+                    <h3>WORKSPACES</h3>
+                    <AddWorkspaceForm />
                 </div>
+
+                {workspaceData ?
+                    workspaceData.map((workspace, i) =>
+                        <button className={`btn workspace-btn ${currentWorkspace == i ? 'active-w': ''}`} key={i} onClick={() => dispatch(setCurrentWorkspace(i))}>
+                            {workspace.name}
+                        </button>)
+                    : ''}
+
             </div>
+            <button className="btn logout-btn" onClick={() => {
+                logout();
+                dispatch(unauthorize());
+                dispatch(setAuthData(null));
+                window.localStorage.removeItem('auth');
+                history.push('/')
+            }}> Logout </button>
 
         </div>
     );
