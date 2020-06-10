@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 const Workspace = require("../models/workspace");
 const auth = require('../../middleware/auth')
@@ -28,7 +29,7 @@ router.get('/', auth, (req, res, next) => {
 });
 
 router.get('/workspaces', auth, (req, res, next) => {
-    let dBQuery = Workspace.find({"users" : req.user_id});
+    let dBQuery = Workspace.find({"users" : req.user._id});
     console.log(dBQuery)
     dBQuery
     .exec()
