@@ -4,17 +4,16 @@ import '../styles/ModalForm.css';
 import { config } from '../config'
 import { useSelector, useDispatch } from 'react-redux';
 
-
 const AddTaskForm = ({ status }) => {
     const authData = useSelector((state) => state.authReducer.authData);
-    const currentWorkspace = useSelector((state) => state.userReducer.workspaces[state.userReducer.currentWorkspace])
+    const currentWorkspace = useSelector((state) => state.userReducer.workspaces[state.userReducer.currentWorkspaceIndex])
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [assignedTo, setAssignedTo] = useState('');
     const [error, setError] = useState('');
     const dispatch = useDispatch();
-    console.log(currentWorkspace);
+    // console.log(currentWorkspace);
 
     const toggleModal = () => {
         console.log(isOpen)
@@ -23,6 +22,7 @@ const AddTaskForm = ({ status }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        // Creating a task on the backend 
         const response = await fetch(`${config.apiURL}/task`, {
             'method': 'POST',
             headers: {
@@ -35,6 +35,7 @@ const AddTaskForm = ({ status }) => {
             console.log('Error addding task')
         } else {
             toggleModal();
+            // Adding that task using taskId to the active workspace
             const data = await response.json();
             console.log(JSON.stringify({ workspaceID: currentWorkspace._id, taskID: data._id }));
             const addTaskToWorkspaceResponse = await fetch(`${config.apiURL}/workspace/workspaceTask`, {
@@ -45,9 +46,10 @@ const AddTaskForm = ({ status }) => {
                 },
                 body: JSON.stringify({ workspaceID: currentWorkspace._id, taskID: data._id })
             });
-            // if (addTaskToWorkspaceResponse.ok) {
-            //     dispatch(addd)
-            // }
+            if (addTaskToWorkspaceResponse.ok) {
+                console.log('Task added successfully');
+                window.location.reload();
+            }
 
             console.log('AddTaskToWorkspaceResponse' + addTaskToWorkspaceResponse);
 

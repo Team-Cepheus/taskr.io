@@ -5,25 +5,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { unauthorize, setAuthData } from '../redux/auth_actions';
 import { useHistory } from 'react-router-dom';
 import { config } from '../config';
-import usefetchData from '../helpers/fetchData';
-import { setWorkspaces, setCurrentWorkspace } from '../redux/user_actions';
+import useFetchData from '../helpers/fetchData';
+import { setWorkspaces, setCurrentWorkspaceIndex } from '../redux/user_actions';
 
 const Sidebar = () => {
     const userData = useSelector((state) => state.authReducer.authData);
-    const currentWorkspace = useSelector((state) => state.userReducer.currentWorkspace)
+    const currentWorkspaceIndex = useSelector((state) => state.userReducer.currentWorkspaceIndex)
     const dispatch = useDispatch();
     const history = useHistory();
     let workspaceData = [];
 
-    if (userData) {
-        workspaceData = usefetchData('users/workspaces', 'GET');
-    }
+    workspaceData = useFetchData('users/workspaces', 'GET');
+
     useEffect(() => {
         console.log(workspaceData);
         if (workspaceData && workspaceData.length !== 0) {
             console.log('workspace data' + workspaceData);
             dispatch(setWorkspaces(workspaceData));
-            dispatch(setCurrentWorkspace(0));
+            dispatch(setCurrentWorkspaceIndex(0));
             history.push('/board');
         }
     }, [workspaceData, history, dispatch]);
@@ -56,7 +55,10 @@ const Sidebar = () => {
 
                 {workspaceData ?
                     workspaceData.map((workspace, i) =>
-                        <button className={`btn workspace-btn ${currentWorkspace == i ? 'active-w' : ''}`} key={i} onClick={() => dispatch(setCurrentWorkspace(i))}>
+                        <button className={`btn workspace-btn ${currentWorkspaceIndex == i ? 'active-w' : ''}`}
+                            key={i}
+                            onClick={() => dispatch(setCurrentWorkspaceIndex(i))}
+                        >
                             {workspace.name}
                         </button>)
                     : ''}

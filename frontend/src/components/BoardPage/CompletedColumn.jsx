@@ -14,14 +14,14 @@ const CompletedColumn = ({ done }) => {
                 <AddTaskForm status={"done"}/>
             </div>
             <div className="rule comp"></div>
-            <Droppable droppableId="todo">
+            <Droppable droppableId="done">
                 {(provided) => (
                     <div
                         className="tasks"
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
-                        {done ? done.map((task, i) => <TaskCard data={task} id={i} key={i} />) : ''}
+                        {done ? done.map((task, i) => <TaskCard data={task} id={`done-${i}`} key={i} />) : ''}
 
                         {provided.placeholder}
                     </div>

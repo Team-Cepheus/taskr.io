@@ -20,7 +20,7 @@ const TodoColumn = ({ todo }) => {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-                            {todo ? todo.map((task, i) => <TaskCard data={task} id={i} key={i} />): ''}
+                            {todo ? todo.map((task, i) => <TaskCard data={task} id={`todo-${i}`} key={i} />): ''}
                             
                             {provided.placeholder}
                         </div>

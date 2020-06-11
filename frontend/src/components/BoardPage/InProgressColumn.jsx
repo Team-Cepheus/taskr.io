@@ -4,6 +4,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
 
 const InProgressColumn = ({ pending }) => {
+    console.log(pending);
     return (
         <div className="inprogresscol">
             <div className="add-task">
@@ -11,14 +12,14 @@ const InProgressColumn = ({ pending }) => {
                 <AddTaskForm status={"pending"}/>
             </div>
             <div className="rule inprog"></div>
-            <Droppable droppableId="todo">
+            <Droppable droppableId="pending">
                 {(provided) => (
                     <div
                         className="tasks"
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
-                        {pending ? pending.map((task, i) => <TaskCard data={task} id={i} key={i} />) : ''}
+                        {pending ? pending.map((task, i) => <TaskCard data={task} id={`pending-${i}`} key={i} />) : ''}
 
                         {provided.placeholder}
                     </div>

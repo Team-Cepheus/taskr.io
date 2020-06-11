@@ -8,30 +8,33 @@ import CompletedColumn from './CompletedColumn';
 import { DragDropContext } from 'react-beautiful-dnd';
 import useCheckAuth from '../../helpers/checkAuth';
 import useFetchData from '../../helpers/fetchData';
-import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTodoTasks, setPendingTasks, setDoneTasks } from '../../redux/user_actions';
 
 const BoardPage = () => {
     useCheckAuth();
     const currentWorkspaceId = useSelector(
         (state) =>
             state.userReducer.workspaces.length !== 0 ?
-                state.userReducer.workspaces[state.userReducer.currentWorkspace]._id
+                state.userReducer.workspaces[state.userReducer.currentWorkspaceIndex]._id
                 : 0)
-    console.log(currentWorkspaceId);
+    // console.log(currentWorkspaceId);
 
+    // Get currently selected workspace data which has user and tasks as objects
     const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');
-    console.log(workspaceData);
+    // console.log(workspaceData);
 
-    const [todo, setTodo] = useState([]);
-    const [pending, setPending] = useState([]);
-    const [done, setDone] = useState([]);
+    const todo = useSelector((state) => state.userReducer.todoTasks );
+    const pending = useSelector((state) => state.userReducer.pendingTasks );
+    const done = useSelector((state) => state.userReducer.doneTasks );
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (workspaceData) {
             let t = [];
             let p = [];
             let d = [];
+            console.log(workspaceData.tasks);
             workspaceData.tasks.forEach(task => {
                 if (task.status == 'done') {
                     d.push(task);
@@ -43,12 +46,15 @@ const BoardPage = () => {
                 }
             });
             console.log(t);
-            setTodo(t);
-            setPending(p);
-            setDone(d);
+            console.log(p);
+            console.log(d);
+
+            dispatch(setTodoTasks(t));
+            dispatch(setPendingTasks(p));
+            dispatch(setDoneTasks(d));
+            
         }
     }, [workspaceData]);
-    // const useFetchData()
 
     const onDragEnd = (result) => {
         //TODO: implement dragging logic
@@ -56,7 +62,6 @@ const BoardPage = () => {
         if (!dest) {
             return
         }
-
     }
 
     return (
