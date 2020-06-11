@@ -23,12 +23,25 @@ router
       });
   })
 
-  .post(auth,(req, res) => {
+  .post(auth,async (req, res) => {
+    const user_names = req.body.users;
+    let userids = []
+    user_names.forEach(async (item,index)=>{
+     await User.find({username : item}).exec().then(result=>{
+        userids.push(result[0]._id)
+
+      })
+      .catch(err=>{
+        console.log(err)
+        return res.status(500).json({
+          error: err,
+        });
+      });
+    })
     const workSpace = new Workspace({
-      // _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
       admin: req.body.admin,
-      users: req.body.users,
+      users: userids,
       tasks: req.body.tasks,
     });
     workSpace
