@@ -21,7 +21,7 @@ const BoardPage = () => {
     // console.log(currentWorkspaceId);
 
     // Get currently selected workspace data which has user and tasks as objects
-    const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');
+    const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');   
     // console.log(workspaceData);
 
     const todo = useSelector((state) => state.userReducer.todoTasks );

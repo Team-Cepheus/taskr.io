@@ -2,9 +2,9 @@ import React from 'react';
 import '../../styles/TaskCard.css'
 import { Draggable } from 'react-beautiful-dnd';
 
-const TaskCard = ({ id, data }) => {
+const TaskCard = ({ id, data, index }) => {
     return (
-        <Draggable draggableId={String(id)} index={id}>
+        <Draggable draggableId={id} index={index}>
             {(provided) => (
                 <div className="task-card"
                     ref={provided.innerRef}

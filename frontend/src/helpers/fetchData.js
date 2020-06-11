@@ -14,6 +14,7 @@ const useFetchData = (url, method) => {
             try {
 
                 const response = await fetch(`${config.apiURL}/${url}`, {
+                    signal: abortController.signal,
                     method: method,
                     headers: {
                         'Authorization': 'Bearer ' + token,

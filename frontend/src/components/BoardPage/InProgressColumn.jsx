@@ -19,7 +19,7 @@ const InProgressColumn = ({ pending }) => {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
-                        {pending ? pending.map((task, i) => <TaskCard data={task} id={`pending-${i}`} key={i} />) : ''}
+                        {pending ? pending.map((task, i) => <TaskCard data={task} id={`pending-${i}`} key={i} index={i} />) : ''}
 
                         {provided.placeholder}
                     </div>

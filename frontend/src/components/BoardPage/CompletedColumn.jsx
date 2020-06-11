@@ -21,7 +21,7 @@ const CompletedColumn = ({ done }) => {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
-                        {done ? done.map((task, i) => <TaskCard data={task} id={`done-${i}`} key={i} />) : ''}
+                        {done ? done.map((task, i) => <TaskCard data={task} id={`done-${i}`} key={i} index={i} />) : ''}
 
                         {provided.placeholder}
                     </div>

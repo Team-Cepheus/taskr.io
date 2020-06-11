@@ -14,7 +14,7 @@ store.subscribe(() => console.log(store.getState()))
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={Loading} persistor={persistor}>
+      <PersistGate loading={<Loading/>} persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
