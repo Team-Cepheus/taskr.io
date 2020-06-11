@@ -13,7 +13,11 @@ import { useState } from 'react';
 
 const BoardPage = () => {
     useCheckAuth();
-    const currentWorkspaceId = useSelector((state) => state.userReducer.workspaces[state.userReducer.currentWorkspace]._id)
+    const currentWorkspaceId = useSelector(
+        (state) =>
+            state.userReducer.workspaces.length !== 0 ?
+                state.userReducer.workspaces[state.userReducer.currentWorkspace]._id
+                : 0)
     console.log(currentWorkspaceId);
 
     const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');
@@ -22,7 +26,6 @@ const BoardPage = () => {
     const [todo, setTodo] = useState([]);
     const [pending, setPending] = useState([]);
     const [done, setDone] = useState([]);
-
 
     useEffect(() => {
         if (workspaceData) {
@@ -39,7 +42,7 @@ const BoardPage = () => {
                     t.push(task)
                 }
             });
-            console.log(d);
+            console.log(t);
             setTodo(t);
             setPending(p);
             setDone(d);
@@ -62,7 +65,7 @@ const BoardPage = () => {
             <Sidebar />
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="board">
-                    <TodoColumn todos={todo} />
+                    <TodoColumn todo={todo} />
                     <InProgressColumn pending={pending} />
                     <CompletedColumn done={done} />
                 </div>

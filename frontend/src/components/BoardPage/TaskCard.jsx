@@ -18,7 +18,7 @@ const TaskCard = ({ id, data }) => {
                     <p>{ data ? data.description ?? 'No Description': ''} </p>
                     <div className="task-attributes">
                         <p>BY: <span>User</span></p>
-                        <p>ASSIGNED TO: <span>Another user</span></p>
+                        <p>ASSIGNED TO: <span>{data ? data.assignedTo: ''}</span></p>
                     </div>
                 </div>
             )}

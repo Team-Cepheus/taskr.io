@@ -8,7 +8,7 @@ const InProgressColumn = ({ pending }) => {
         <div className="inprogresscol">
             <div className="add-task">
                 <h3>IN PROGRESS</h3>
-                <AddTaskForm />
+                <AddTaskForm status={"pending"}/>
             </div>
             <div className="rule inprog"></div>
             <Droppable droppableId="todo">

@@ -3,6 +3,7 @@ import Topbar from './Topbar';
 import Sidebar from './Sidebar';
 import '../styles/DashboardPage.css'
 import useCheckAuth from '../helpers/checkAuth';
+import AddWorkspaceForm from './AddWorkspaceForm';
 
 const DashboardPage = () => {
     useCheckAuth()
@@ -14,7 +15,8 @@ const DashboardPage = () => {
             <div className="create-workspace-banner">
                 <h1 className="cta">Create a workspace</h1>
                 <p>Create a new workspace or ask another user to add you to a workspace</p>
-                <button className="create-btn">Create a workspace</button>
+                <AddWorkspaceForm  isDashboard={true}/>
+
             </div>
         </>
      );

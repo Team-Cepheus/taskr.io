@@ -1,6 +1,9 @@
+const localStorageData = window.localStorage.getItem('auth');
+
 const authDefaultState = {
     authenticated: false,
-    user: null
+    authData: localStorageData ? JSON.parse(localStorageData) : '',
+    isLoading: true
 }
 
 const authReducer = (state = authDefaultState, action) => {
@@ -19,7 +22,12 @@ const authReducer = (state = authDefaultState, action) => {
         case 'SET_AUTH_DATA':
             return {
                 ...state,
-                user: action.authData
+                authData: action.authData
+            }
+        case 'SET_LOADING':
+            return {
+                ...state,
+                isLoading: action.isLoading
             }
 
         default: 

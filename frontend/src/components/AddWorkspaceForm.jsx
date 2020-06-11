@@ -1,27 +1,33 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import '../styles/ModalForm.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { config } from '../config'
+import { addWorkspace } from '../redux/user_actions';
 
 
-const AddWorkspaceForm = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [fields, setFields] = useState([{ value: null }]);
+
+const AddWorkspaceForm = ({ isDashboard }) => {
+    const authData = useSelector((state) => state.authReducer.authData);
+    const [isOpen, setIsOpen] = useState(false);
+    const [title, setTitle] = useState('');
+    const [fields, setFields] = useState([{ username: null }]);
+    const dispatch = useDispatch();
 
 
     const toggleModal = () => {
-        console.log(isOpen)
         setIsOpen(!isOpen)
     }
 
     function handleChange(i, event) {
         const values = [...fields];
-        values[i].value = event.target.value;
+        values[i].username = event.target.value;
         setFields(values);
     }
 
     function handleAdd() {
         const values = [...fields];
-        values.push({ value: null });
+        values.push({ username: null });
         setFields(values);
     }
 
@@ -34,10 +40,32 @@ const AddWorkspaceForm = () => {
 
     }
 
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        console.log(JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user._id], tasks: [] }))
+        console.log(authData.value);
+        const response = await fetch(`${config.apiURL}/workspace`, {
+            'method': 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + authData.value.token,
+                'Content-Type': 'application/json',
+
+            },
+            body: JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user._id], tasks: [] })
+        })
+        const data = await response.json()
+        if(response.ok) {
+            dispatch(addWorkspace(data));
+        }
+        toggleModal()
+    }
+
 
     return (
         <>
-            <button className="add-btn" onClick={toggleModal}>+</button>
+            {isDashboard ?
+                <button onClick={toggleModal} className="create-btn">Create a workspace </button> :
+                <button className="add-btn" onClick={toggleModal}>+</button>}
             <Modal
                 ariaHideApp={false}
                 className="form-modal"
@@ -50,9 +78,13 @@ const AddWorkspaceForm = () => {
                 }}>
 
                 <div className="add-form">
-                    <form action="">
+                    <form onSubmit={onSubmit}>
                         <label htmlFor="workspaceName">Workspace Name</label>
-                        <input type="text" name="" id="workspaceName" placeholder="Workspace Name" />
+                        <input type="text" name="title" id="workspaceName" placeholder="Workspace Name"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                        />
                         <div>
                             <label htmlFor="assignTo">Assign Task to</label>
                             <button className="add-btn add-input" type="button" onClick={() => handleAdd()}>
@@ -70,9 +102,9 @@ const AddWorkspaceForm = () => {
                                     />
                                     {
                                         fields.indexOf(field) > 0 ? (
-                                        <button type="button" className="btn remove-input" onClick={() => handleRemove(idx)}>
-                                            x
-                                        </button>) : ''
+                                            <button type="button" className="btn remove-input" onClick={() => handleRemove(idx)}>
+                                                x
+                                            </button>) : ''
                                     }
 
                                 </div>

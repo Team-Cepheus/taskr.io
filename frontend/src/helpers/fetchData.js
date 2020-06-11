@@ -6,7 +6,7 @@ import { config } from '../config';
 const useFetchData = (url, method) => {
     const abortController = new AbortController();
     const [response, setResponse] = useState();
-    const authData = useSelector((state) => state.authReducer.user);
+    const authData = useSelector((state) => state.authReducer.authData);
     console.log(authData);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const useFetchData = (url, method) => {
                 console.log(e)
             }
         }
-        fetchData(url, method, authData.value.token);
+        fetchData(url, method, authData.value ? authData.value.token : authData.token);
         return () => {
             abortController.abort();
         };

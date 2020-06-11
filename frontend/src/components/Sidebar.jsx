@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '../styles/Sidebar.css';
 import AddWorkspaceForm from './AddWorkspaceForm';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,20 +9,24 @@ import usefetchData from '../helpers/fetchData';
 import { setWorkspaces, setCurrentWorkspace } from '../redux/user_actions';
 
 const Sidebar = () => {
-    const userData = useSelector((state) => state.authReducer.user);
+    const userData = useSelector((state) => state.authReducer.authData);
     const currentWorkspace = useSelector((state) => state.userReducer.currentWorkspace)
     const dispatch = useDispatch();
     const history = useHistory();
+    let workspaceData = [];
 
-    const workspaceData = usefetchData('users/workspaces', 'GET');
-
+    if (userData) {
+        workspaceData = usefetchData('users/workspaces', 'GET');
+    }
     useEffect(() => {
-        if(workspaceData){
+        console.log(workspaceData);
+        if (workspaceData && workspaceData.length !== 0) {
+            console.log('workspace data' + workspaceData);
             dispatch(setWorkspaces(workspaceData));
             dispatch(setCurrentWorkspace(0));
             history.push('/board');
         }
-    }, [workspaceData]);
+    }, [workspaceData, history, dispatch]);
 
     const logout = async () => {
         const token = JSON.parse(window.localStorage.getItem('auth')).value.token;
@@ -37,13 +41,12 @@ const Sidebar = () => {
         console.log(response);
     }
 
-
     return (
         <div className="sidebar">
             <div className="profile">
                 <img className="avatar" src="/static/avatars/2.png" alt="" />
-                <h3>{userData !== undefined ? userData.value.user.name : ''}</h3>
-                <p>{userData !== undefined ? userData.value.user.email : ''}</p>
+                <h3>{userData !== undefined ? userData.value ? userData.value.user.name : '' : ''}</h3>
+                <p>{userData !== undefined ? userData.value ? userData.value.user.email : '' : ''}</p>
             </div>
             <div className="workspaces">
                 <div>
@@ -53,7 +56,7 @@ const Sidebar = () => {
 
                 {workspaceData ?
                     workspaceData.map((workspace, i) =>
-                        <button className={`btn workspace-btn ${currentWorkspace == i ? 'active-w': ''}`} key={i} onClick={() => dispatch(setCurrentWorkspace(i))}>
+                        <button className={`btn workspace-btn ${currentWorkspace == i ? 'active-w' : ''}`} key={i} onClick={() => dispatch(setCurrentWorkspace(i))}>
                             {workspace.name}
                         </button>)
                     : ''}

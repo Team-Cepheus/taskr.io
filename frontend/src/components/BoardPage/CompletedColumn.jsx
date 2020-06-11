@@ -11,7 +11,7 @@ const CompletedColumn = ({ done }) => {
         <div className="completedcol">
             <div className="add-task">
                 <h3>COMPLETED</h3>
-                <AddTaskForm/>
+                <AddTaskForm status={"done"}/>
             </div>
             <div className="rule comp"></div>
             <Droppable droppableId="todo">
