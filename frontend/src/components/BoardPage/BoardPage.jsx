@@ -9,7 +9,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import useCheckAuth from '../../helpers/checkAuth';
 import useFetchData from '../../helpers/fetchData';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTodoTasks, setPendingTasks, setDoneTasks } from '../../redux/user_actions';
+import { setTodoTasks, setPendingTasks, setDoneTasks, sort } from '../../redux/user_actions';
 
 const BoardPage = () => {
     useCheckAuth();
@@ -21,12 +21,12 @@ const BoardPage = () => {
     // console.log(currentWorkspaceId);
 
     // Get currently selected workspace data which has user and tasks as objects
-    const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');   
+    const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');
     // console.log(workspaceData);
 
-    const todo = useSelector((state) => state.userReducer.todoTasks );
-    const pending = useSelector((state) => state.userReducer.pendingTasks );
-    const done = useSelector((state) => state.userReducer.doneTasks );
+    const todo = useSelector((state) => state.userReducer.todoTasks);
+    const pending = useSelector((state) => state.userReducer.pendingTasks);
+    const done = useSelector((state) => state.userReducer.doneTasks);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -52,16 +52,28 @@ const BoardPage = () => {
             dispatch(setTodoTasks(t));
             dispatch(setPendingTasks(p));
             dispatch(setDoneTasks(d));
-            
+
         }
     }, [workspaceData]);
 
     const onDragEnd = (result) => {
-        //TODO: implement dragging logic
-        const { dest, source, draggableId } = result;
-        if (!dest) {
+        const { destination, source, draggableId } = result;
+        if (!destination) {
             return
         }
+
+        console.log( source.droppableId,
+            destination.droppableId,
+            source.index,
+            destination.index,
+            draggableId);
+        dispatch(sort(
+            source.droppableId,
+            destination.droppableId,
+            source.index,
+            destination.index,
+            draggableId
+        ));
     }
 
     return (

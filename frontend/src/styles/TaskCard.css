@@ -8,18 +8,25 @@
 .task-card > div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
+.task-card div:first-child {
+    border-bottom: 1px solid #454755;
+}
 
 .task-title {
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
     color: #ffffff !important;
 }
 
 .timestamp {
     opacity: 0.5;
     font-weight: 300;
+    margin-left: auto;
+    align-self: center;
 }
 
 .task-attributes {
@@ -34,4 +41,17 @@
 
 .task-attributes span {
     color: #14ffec;
+}
+
+.delete-task-btn {
+    background-color: #0000001c;
+    color: #ffffff7c;
+    border-radius: 100%;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    /* height: 70%; */
+}
+
+.delete-task-btn:hover {
+    color: #d34b4b;
 }

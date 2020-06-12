@@ -12,7 +12,7 @@ const InProgressColumn = ({ pending }) => {
                 <AddTaskForm status={"pending"}/>
             </div>
             <div className="rule inprog"></div>
-            <Droppable droppableId="pending">
+            <Droppable droppableId="pendingTasks">
                 {(provided) => (
                     <div
                         className="tasks"

@@ -1,3 +1,11 @@
+import { config } from '../config';
+
+let token = ''
+
+if(localStorage.getItem('auth')){
+    token = JSON.parse(localStorage.getItem('auth')).value.token
+}
+
 const userDefaultState = {
     workspaces: [], // all the workspace of the user which stores tasks and users as id
     currentWorkspaceIndex: 0,
@@ -5,6 +13,7 @@ const userDefaultState = {
     pendingTasks: [],
     doneTasks: []
 }
+
 
 
 const userReducer = (state = userDefaultState, action) => {
@@ -42,21 +51,46 @@ const userReducer = (state = userDefaultState, action) => {
                 ...state,
                 doneTasks: action.doneTasks
             }
-        //     case 'ADD_TODO_TASK':
-        //     return {
-        //         ...state,
-                // // todoTasks: [...state.todoTasks ,action.todoTask]
-        //     }
-        // case 'ADD_PENDING_TASK':
-        //     return {
-        //         ...state,
-        //         pendingTasks: [...state.pendingTasks ,action.pendingTask]
-        //     }
-        // case 'ADD_DONE_TASK':
-        //     return {
-        //         ...state,
-        //         pendingTasks: [...state.doneTasks ,action.doneTask]
-        //     }
+        case 'DRAG_HAPPENED':
+            const {
+                droppableIdStart,
+                droppableIdEnd,
+                droppableIndexStart,
+                droppableIndexEnd,
+                draggableId
+            } = action.payload;
+            // Movement in the same column
+            if (droppableIdStart == droppableIdEnd) {
+                const newTaskList = state[droppableIdStart];
+                const task = newTaskList.splice(droppableIndexStart, 1)[0];
+                newTaskList.splice(droppableIndexEnd, 0, task);
+                return {
+                    ...state,
+                    droppableIdStart: newTaskList
+                }
+            }
+            // Cross column movement 
+            if(droppableIdStart != droppableIdEnd) {
+                const listStart = state[droppableIdStart];
+                const task = listStart.splice(droppableIndexStart, 1)[0];
+                const listEnd = state[droppableIdEnd];
+                listEnd.splice(droppableIndexEnd, 0, task);
+                fetch(`${config.apiURL}/${task._id}/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+        
+                    },
+                });
+                return {
+                    ...state,
+                    droppableIdStart: listStart,
+                    droppableIdEnd: listEnd
+
+                }
+            }
+            break;
 
         default:
             return state;

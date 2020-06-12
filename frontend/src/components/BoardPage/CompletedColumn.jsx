@@ -14,7 +14,7 @@ const CompletedColumn = ({ done }) => {
                 <AddTaskForm status={"done"}/>
             </div>
             <div className="rule comp"></div>
-            <Droppable droppableId="done">
+            <Droppable droppableId="doneTasks">
                 {(provided) => (
                     <div
                         className="tasks"

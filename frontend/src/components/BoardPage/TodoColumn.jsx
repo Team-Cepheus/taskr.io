@@ -13,7 +13,7 @@ const TodoColumn = ({ todo }) => {
                 <AddTaskForm status={"todo"} />
             </div>
             <div className="rule todo"></div>
-            <Droppable droppableId="todo">
+            <Droppable droppableId="todoTasks">
                 {(provided) => (
                         <div
                             className="tasks"
