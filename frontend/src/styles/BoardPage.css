@@ -23,6 +23,7 @@
 .tasks { 
     overflow-y: scroll;
     scrollbar-width: none;
+    height: 100%;
 }
 
 .tasks::-webkit-scrollbar {

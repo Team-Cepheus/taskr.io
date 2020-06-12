@@ -9,6 +9,7 @@
     background-color: #25262e;
     align-items: left;
     padding: 0 1rem;
+    z-index: 1;
 }
 
 .avatar {

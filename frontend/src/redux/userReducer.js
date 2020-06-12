@@ -2,7 +2,7 @@ import { config } from '../config';
 
 let token = ''
 
-if(localStorage.getItem('auth')){
+if (localStorage.getItem('auth')) {
     token = JSON.parse(localStorage.getItem('auth')).value.token
 }
 
@@ -13,7 +13,6 @@ const userDefaultState = {
     pendingTasks: [],
     doneTasks: []
 }
-
 
 
 const userReducer = (state = userDefaultState, action) => {
@@ -70,25 +69,30 @@ const userReducer = (state = userDefaultState, action) => {
                 }
             }
             // Cross column movement 
-            if(droppableIdStart != droppableIdEnd) {
+            if (droppableIdStart != droppableIdEnd) {
                 const listStart = state[droppableIdStart];
                 const task = listStart.splice(droppableIndexStart, 1)[0];
                 const listEnd = state[droppableIdEnd];
                 listEnd.splice(droppableIndexEnd, 0, task);
-                fetch(`${config.apiURL}/${task._id}/logout`, {
-                    method: 'POST',
+                fetch(`${config.apiURL}/task/${task._id}/${droppableIdEnd.slice(0,-5)}`, {
+                    method: 'PATCH',
                     headers: {
                         'Authorization': 'Bearer ' + token,
                         'Content-Type': 'application/json'
-        
+
                     },
-                });
+                }).then((response) => {
+                    if (response.ok) {
+                        console.log('status reset successfully')
+                    }
+                }).catch((e) => console.log(e));
                 return {
                     ...state,
                     droppableIdStart: listStart,
                     droppableIdEnd: listEnd
 
                 }
+
             }
             break;
 
