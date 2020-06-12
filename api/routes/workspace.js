@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Task = require("../models/tasks");
 const User = require("../models/users");
 const auth = require("../../middleware/auth.js");
+const tasks = require("../models/tasks");
 
 router
   .route("/")
@@ -23,26 +24,24 @@ router
       });
   })
 
-  .post(auth,async (req, res) => {
+  .post(auth, async (req, res) => {
     const user_names = req.body.users;
-    let userids = []
-    user_names.forEach(async (item,index)=>{
-     await User.find({username : item}).exec().then(result=>{
-        userids.push(result[0]._id)
 
-      })
-      .catch(err=>{
-        console.log(err)
-        return res.status(500).json({
-          error: err,
-        });
-      });
-    })
+    let userIds = undefined;
+    try {
+      userIds = await Promise.all(user_names.map(async (username) => {
+        const userid = await User.findOne({ username }).select(["-password", "-tokens", "-__v"])
+        return userid
+      }));
+    } catch (e) {
+      res.status(500).send(e);
+    }
+
     const workSpace = new Workspace({
       name: req.body.name,
-      admin: req.body.admin,
-      users: userids,
-      tasks: req.body.tasks,
+      admin: req.user.username,
+      users: userIds,
+      tasks: [...req.body.tasks]
     });
     workSpace
       .save()

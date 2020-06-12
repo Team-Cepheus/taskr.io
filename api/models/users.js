@@ -4,11 +4,11 @@ const validator = require('validator')
 const bcrypt = require('bcrypt')
 const userSchema = mongoose.Schema({
 
-    name: {required:true,type:String},
+    name: { required: true, type: String },
     username: {
-        required:true,
-        type:String,
-        unique:true,
+        required: true,
+        type: String,
+        unique: true,
     },
     email: {
         type: String,
@@ -42,7 +42,6 @@ const userSchema = mongoose.Schema({
 userSchema.methods.generateAuthToken = async function () {
     const user = this
     const token = jwt.sign({ _id: user._id.toString() }, 'keySecret')
-
     user.tokens = user.tokens.concat({ token })
     await user.save()
     return token
@@ -64,7 +63,7 @@ userSchema.pre('save', async function (next) {
     const user = this
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
-        }
+    }
 });
 
 module.exports = mongoose.model('Users', userSchema);

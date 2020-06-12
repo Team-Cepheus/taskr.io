@@ -1,7 +1,6 @@
 import { config } from '../config';
 
 let token = ''
-
 if (localStorage.getItem('auth')) {
     token = JSON.parse(localStorage.getItem('auth')).value.token
 }
@@ -13,7 +12,6 @@ const userDefaultState = {
     pendingTasks: [],
     doneTasks: []
 }
-
 
 const userReducer = (state = userDefaultState, action) => {
     switch (action.type) {
