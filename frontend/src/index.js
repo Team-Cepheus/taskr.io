@@ -9,15 +9,17 @@ import Loading from './components/Loading';
 
 
 
-const { store, persistor} = globalStore();
+const { store, persistor } = globalStore();
 store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       {/* <PersistGate loading={<Loading/>} persistor={persistor}> */}
+      <>
         <App />
-        <Loading/>
+        <Loading />
+      </>
       {/* </PersistGate> */}
     </Provider>
   </React.StrictMode>,

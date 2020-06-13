@@ -7,7 +7,7 @@ const Loading = () => {
     const { promiseInProgress } = usePromiseTracker();
     return promiseInProgress && ( 
         <div className="loading">
-            <Loader type="TailSpin" color="#14FFEC" height="50" width="50" />
+            <Loader className="loader-spinner" type="TailSpin" color="#14FFEC" height="50" width="50" />
         </div>
      );
 }

@@ -6,7 +6,6 @@ import { config } from '../config'
 import { addWorkspace } from '../redux/user_actions';
 
 
-
 const AddWorkspaceForm = ({ isDashboard }) => {
     const authData = useSelector((state) => state.authReducer.authData);
     const [isOpen, setIsOpen] = useState(false);
