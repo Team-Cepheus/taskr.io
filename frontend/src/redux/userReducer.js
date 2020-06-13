@@ -1,9 +1,12 @@
 import { config } from '../config';
 
-let token = ''
-if (localStorage.getItem('auth')) {
-    token = JSON.parse(localStorage.getItem('auth')).value.token
-}
+// let token = ''
+// setTimeout(() => {
+//     if (localStorage.getItem('auth')) {
+//         token = JSON.parse(localStorage.getItem('auth')).value.token
+//     }
+// }, 1000)
+
 
 const userDefaultState = {
     workspaces: [], // all the workspace of the user which stores tasks and users as id
@@ -54,7 +57,7 @@ const userReducer = (state = userDefaultState, action) => {
                 droppableIdEnd,
                 droppableIndexStart,
                 droppableIndexEnd,
-                draggableId
+                draggableId, token
             } = action.payload;
             // Movement in the same column
             if (droppableIdStart == droppableIdEnd) {

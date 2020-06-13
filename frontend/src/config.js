@@ -1,3 +1,3 @@
 export const config =  {
-    apiURL: 'http://kanban99.herokuapp.com'
+    apiURL: 'http://localhost:3001'
 }

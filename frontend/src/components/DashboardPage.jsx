@@ -6,7 +6,7 @@ import useCheckAuth from '../helpers/checkAuth';
 import AddWorkspaceForm from './AddWorkspaceForm';
 
 const DashboardPage = () => {
-    useCheckAuth()
+    useCheckAuth();
 
     return ( 
         <>

@@ -54,11 +54,13 @@ const AddWorkspaceForm = ({ isDashboard }) => {
             },
             body: JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user.username, ...usernames], tasks: [] })
         })
-        const data = await response.json()
+        const data = await response.json();
         if(response.ok) {
+            
             dispatch(addWorkspace(data));
         }
-        // toggleModal();
+        console.log(response);
+        toggleModal();
         // window.location.reload();
     }
 

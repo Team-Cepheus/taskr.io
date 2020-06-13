@@ -8,15 +8,17 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Loading from './components/Loading';
 
 
+
 const { store, persistor} = globalStore();
-store.subscribe(() => console.log(store.getState()))
+store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={<Loading/>} persistor={persistor}>
+      {/* <PersistGate loading={<Loading/>} persistor={persistor}> */}
         <App />
-      </PersistGate>
+        <Loading/>
+      {/* </PersistGate> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

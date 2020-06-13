@@ -18,7 +18,6 @@ const BoardPage = () => {
             state.userReducer.workspaces.length !== 0 ?
                 state.userReducer.workspaces[state.userReducer.currentWorkspaceIndex]._id
                 : 0)
-    // console.log(currentWorkspaceId);
 
     // Get currently selected workspace data which has user and tasks as objects
     const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');
@@ -28,6 +27,10 @@ const BoardPage = () => {
     const pending = useSelector((state) => state.userReducer.pendingTasks);
     const done = useSelector((state) => state.userReducer.doneTasks);
     const dispatch = useDispatch();
+    let authData = '';
+    if(localStorage.getItem('auth')){
+        authData = JSON.parse(localStorage.getItem('auth'));
+    }
 
     useEffect(() => {
         if (workspaceData) {
@@ -73,7 +76,8 @@ const BoardPage = () => {
             destination.droppableId,
             source.index,
             destination.index,
-            draggableId
+            draggableId,
+            authData.value.token
         ));
     }
 

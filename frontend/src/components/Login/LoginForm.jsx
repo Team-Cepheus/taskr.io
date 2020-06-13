@@ -13,7 +13,7 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    useCheckAuth()
+    useCheckAuth();
 
     const onSubmit = (e) => {
         e.preventDefault();
