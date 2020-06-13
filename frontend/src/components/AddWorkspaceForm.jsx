@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import '../styles/ModalForm.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { config } from '../config'
-import { addWorkspace } from '../redux/user_actions';
+import { addWorkspace, setError } from '../redux/user_actions';
 
 
 const AddWorkspaceForm = ({ isDashboard }) => {
@@ -43,7 +43,7 @@ const AddWorkspaceForm = ({ isDashboard }) => {
         e.preventDefault();
         const usernames = fields.map(field => field.username);
         console.log(JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user.username, ...usernames], tasks: [] }))
-        console.log(authData.value);
+        // console.log(authData.value);
         const response = await fetch(`${config.apiURL}/workspace`, {
             'method': 'POST',
             headers: {
@@ -51,18 +51,26 @@ const AddWorkspaceForm = ({ isDashboard }) => {
                 'Content-Type': 'application/json',
 
             },
-            body: JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user.username, ...usernames], tasks: [] })
+            body: JSON.stringify({ 
+                name: title, 
+                admin: authData.value.user.username, 
+                users: [authData.value.user.username, ...usernames].filter((value) => value!=null ), 
+                tasks: [] 
+            })
         })
-        const data = await response.json();
-        if(response.ok) {
-            
-            dispatch(addWorkspace(data));
-        }
-        console.log(response);
-        toggleModal();
-        window.location.reload();
-    }
 
+        const data = await response.json();
+        if (response.ok) {
+            dispatch(addWorkspace(data));
+            console.log(response);
+            toggleModal();
+            window.location.reload();
+        } else if ( !response.ok){
+            dispatch(setError('Username(s) not found! Make sure all usernames are correct'));
+            console.log('error set');
+        }
+    
+    }
 
     return (
         <>

@@ -30,3 +30,20 @@
     margin-left: 3.5rem;
     letter-spacing: 0.05em;
 }
+
+.users {
+    margin-left: auto;
+    margin-right: 3.5rem;
+    background-color: #1B1B21;
+    padding: 0.5rem 1rem;
+}
+
+.users span {
+    color: #14ffeb;
+    margin-right: 0.1rem;
+}
+
+.users .users-info {
+    color: #ffffff6b;
+    
+}

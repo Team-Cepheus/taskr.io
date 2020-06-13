@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar';
 import Topbar from '../Topbar'
 import TodoColumn from './TodoColumn';
@@ -10,6 +10,7 @@ import useCheckAuth from '../../helpers/checkAuth';
 import useFetchData from '../../helpers/fetchData';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTodoTasks, setPendingTasks, setDoneTasks, sort } from '../../redux/user_actions';
+import ErrorModal from '../ErrorModal';
 
 const BoardPage = () => {
     useCheckAuth();
@@ -17,7 +18,8 @@ const BoardPage = () => {
         (state) =>
             state.userReducer.workspaces.length !== 0 ?
                 state.userReducer.workspaces[state.userReducer.currentWorkspaceIndex]._id
-                : 0)
+                : 0
+    );
 
     // Get currently selected workspace data which has user and tasks as objects
     const workspaceData = useFetchData(`workspace/${currentWorkspaceId}`, 'GET');
@@ -26,14 +28,17 @@ const BoardPage = () => {
     const todo = useSelector((state) => state.userReducer.todoTasks);
     const pending = useSelector((state) => state.userReducer.pendingTasks);
     const done = useSelector((state) => state.userReducer.doneTasks);
+    const error = useSelector((state) => state.userReducer.error);
+    const [users, setUsers] = useState([]);
     const dispatch = useDispatch();
     let authData = '';
-    if(localStorage.getItem('auth')){
+    if (localStorage.getItem('auth')) {
         authData = JSON.parse(localStorage.getItem('auth'));
     }
 
     useEffect(() => {
         if (workspaceData) {
+            setUsers(workspaceData.users.map((user) => user.username));
             let t = [];
             let p = [];
             let d = [];
@@ -65,8 +70,7 @@ const BoardPage = () => {
         if (!destination) {
             return
         }
-
-        console.log( source.droppableId,
+        console.log(source.droppableId,
             destination.droppableId,
             source.index,
             destination.index,
@@ -83,13 +87,14 @@ const BoardPage = () => {
 
     return (
         <div>
-            <Topbar />
+            <Topbar users={users} />
             <Sidebar />
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="board">
                     <TodoColumn todo={todo} />
                     <InProgressColumn pending={pending} />
                     <CompletedColumn done={done} />
+                    <ErrorModal error={error} />
                 </div>
             </DragDropContext>
         </div>

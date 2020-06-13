@@ -28,21 +28,6 @@ export const setDoneTasks = (doneTasks) => ({
     doneTasks
 });
 
-// export const addTodoTask = (todoTask) => ({
-//     type: 'ADD_TODO_TASK',
-//     todoTask
-// });
-
-// export const addPendingTask = (pendingTask) => ({
-//     type: 'ADD_PENDING_TASK',
-//     pendingTask
-// });
-
-// export const addDoneTask = (doneTask) => ({
-//     type: 'ADD_DONE_TASK',
-//     doneTask
-// });
-
 export const sort = (
     droppableIdStart,
     droppableIdEnd,
@@ -59,4 +44,9 @@ export const sort = (
         draggableId,
         token
     }
+});
+
+export const setError = (error) => ({
+    type: 'SET_ERROR',
+    error
 });

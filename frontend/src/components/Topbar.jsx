@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Topbar.css'
 import { useSelector } from 'react-redux';
 
-const Topbar = () => {
+const Topbar = ({ users }) => {
     const authData = useSelector((state) => state.authReducer.authData);
 
     return (
@@ -12,6 +12,10 @@ const Topbar = () => {
             </div>
             <div className="greeting">
                 <h2>Hello, { authData.value ? authData.value.user.username : ''}</h2>
+            </div>
+            <div className="users">
+                { users && <span className="users-info">Users in this workspace: </span> }
+                { users &&  users.map((user, i) => <span key={i}>{`${user}, `}</span>) }
             </div>
         </div>
     );

@@ -5,13 +5,14 @@ import { authorize, setAuthData } from '../../redux/auth_actions';
 import { useHistory } from 'react-router-dom';
 import useCheckAuth from '../../helpers/checkAuth';
 
+
 const LoginForm = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     useCheckAuth();
 
@@ -34,7 +35,7 @@ const LoginForm = () => {
                     return resp.json();
                 })
                 .then((data) => {
-                    console.log(data)
+                    // console.log(data)
                     window.localStorage.setItem('auth', JSON.stringify({
                         value: data,
                     }));

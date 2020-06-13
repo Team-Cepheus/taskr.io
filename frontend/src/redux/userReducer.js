@@ -1,19 +1,12 @@
 import { config } from '../config';
 
-// let token = ''
-// setTimeout(() => {
-//     if (localStorage.getItem('auth')) {
-//         token = JSON.parse(localStorage.getItem('auth')).value.token
-//     }
-// }, 1000)
-
-
 const userDefaultState = {
     workspaces: [], // all the workspace of the user which stores tasks and users as id
     currentWorkspaceIndex: 0,
     todoTasks: [],
     pendingTasks: [],
-    doneTasks: []
+    doneTasks: [],
+    error: ''
 }
 
 const userReducer = (state = userDefaultState, action) => {
@@ -41,15 +34,23 @@ const userReducer = (state = userDefaultState, action) => {
                 ...state,
                 todoTasks: action.todoTasks
             }
+
         case 'SET_PENDING_TASKS':
             return {
                 ...state,
                 pendingTasks: action.pendingTasks
             }
+
         case 'SET_DONE_TASKS':
             return {
                 ...state,
                 doneTasks: action.doneTasks
+            }
+
+        case 'SET_ERROR':
+            return {
+                ...state,
+                error: action.error
             }
         case 'DRAG_HAPPENED':
             const {

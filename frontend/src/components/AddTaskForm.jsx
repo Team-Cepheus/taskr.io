@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import '../styles/ModalForm.css';
 import { config } from '../config'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const AddTaskForm = ({ status }) => {
     const authData = useSelector((state) => state.authReducer.authData);
@@ -12,7 +12,6 @@ const AddTaskForm = ({ status }) => {
     const [description, setDescription] = useState('');
     const [assignedTo, setAssignedTo] = useState('');
     const [error, setError] = useState('');
-    const dispatch = useDispatch();
     // console.log(currentWorkspace);
 
     const toggleModal = () => {
@@ -49,9 +48,10 @@ const AddTaskForm = ({ status }) => {
             if (addTaskToWorkspaceResponse.ok) {
                 console.log('Task added successfully');
                 window.location.reload();
+            } else {
+                setError('Error! Try again.')
             }
 
-            console.log('AddTaskToWorkspaceResponse' + addTaskToWorkspaceResponse);
 
         }
     }
