@@ -1,0 +1,66 @@
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.493);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+.form-modal {
+    background-color: #1B1B21;
+    padding: 2rem;
+    outline: none;
+    border-radius: 5px;
+}
+.form-modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-modal input, textarea{
+    font-family: inherit;
+    font-weight: 300;
+    background-color: #2F3039;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    resize: vertical;
+}
+
+.form-modal .btn {
+    font-family: inherit;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.add-input {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.remove-input{
+    background-color: #D72323;
+    padding: 0.5rem 0.75rem;
+}
+
+/* --------MODAL ANIMATION------- */
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: all 100ms ease-in;
+  }
+  
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+  
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+  
