@@ -61,7 +61,7 @@ const AddWorkspaceForm = ({ isDashboard }) => {
         }
         console.log(response);
         toggleModal();
-        // window.location.reload();
+        window.location.reload();
     }
 
 
