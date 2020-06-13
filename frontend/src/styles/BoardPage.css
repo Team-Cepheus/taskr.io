@@ -1,0 +1,69 @@
+.board {
+    width: calc(100vw - 10rem);
+    height: calc(100vh - 4rem);
+    position: absolute;
+    top: 4rem;
+    left: 10rem;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: stretch;
+}
+
+.todocol,
+.inprogresscol,
+.completedcol {
+    flex-grow: 1;
+    flex-basis: 33%;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.tasks { 
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 100%;
+}
+
+.tasks::-webkit-scrollbar {
+    display: none;
+}
+
+.todocol,
+.inprogresscol {
+    border-right: 1px solid #ffffff1a;
+}
+
+.add-task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 0 1rem; */
+}
+
+.todocol h3,
+.inprogresscol h3,
+.completedcol h3 {
+    color: rgba(255, 255, 255, 0.6);
+    display: inline-block;
+}
+
+.rule {
+    padding: 0.2rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.todo {
+    background-color: #D72323;
+}
+
+.inprog{
+    background: #FFC045;
+}
+
+.comp{
+    background: #14FFEC;
+}

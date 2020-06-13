@@ -1,0 +1,43 @@
+/* --------GLOBAL STYLES-------- */
+
+* {
+  box-sizing: border-box;
+  color: white;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  /* z-index: -2; */
+  background-color: #1b1b21;
+  font-family: "Poppins", sans-serif;
+  font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  border: none;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #3e3f4d;
+  outline: 1px solid #1b1b21;
+}
+body::-webkit-scrollbar {
+  width: 5px; /* width of the entire scrollbar */
+}
+
+@media only screen and (max-width: 1378px) {
+  body {
+    overflow-x: scroll;
+  }
+  .board {
+    min-width: 1368px;
+  }
+}

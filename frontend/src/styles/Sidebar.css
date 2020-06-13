@@ -1,0 +1,79 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: calc(100vh - 3.95rem);
+    width: 10rem;
+    background-color: #25262e;
+    align-items: left;
+    padding: 0 1rem;
+    z-index: 1;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 60px;
+    height: auto;
+    margin-top: 1.5rem;
+}
+
+.profile {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    word-wrap: break-word;
+}
+
+.profile h3 {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.profile p {
+    margin: 0.1rem 0 0.5rem 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.workspaces{
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.workspaces h3 {
+    font-weight: 500;
+    color: #14ffeb;
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.add-btn {
+    border: none;
+    border-radius: 100%;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    background-color: #2F3039;
+}
+
+.logout-btn {
+    background-color: transparent;
+    color: #ffffffa4;
+    text-decoration: underline;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+
+.logout-btn:hover {
+    color: #ffffff;
+}
+
+.workspace-btn {
+    background-color: transparent;
+    font-weight: 400;
+    width: 100%;
+}
+
+.active-w {
+    background-color: #2F3039;
+}
