@@ -42,7 +42,8 @@ const AddWorkspaceForm = ({ isDashboard }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user._id], tasks: [] }))
+        const usernames = fields.map(field => field.username);
+        console.log(JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user.username, ...usernames], tasks: [] }))
         console.log(authData.value);
         const response = await fetch(`${config.apiURL}/workspace`, {
             'method': 'POST',
@@ -51,14 +52,14 @@ const AddWorkspaceForm = ({ isDashboard }) => {
                 'Content-Type': 'application/json',
 
             },
-            body: JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user._id], tasks: [] })
+            body: JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user.username, ...usernames], tasks: [] })
         })
         const data = await response.json()
         if(response.ok) {
             dispatch(addWorkspace(data));
         }
-        toggleModal();
-        window.location.reload();
+        // toggleModal();
+        // window.location.reload();
     }
 
 
