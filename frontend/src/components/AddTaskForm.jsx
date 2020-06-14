@@ -12,7 +12,7 @@ const AddTaskForm = ({ status, workspaceUsers }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [assignedTo, setAssignedTo] = useState({value : null});
+    const [assignedTo, setAssignedTo] = useState('');
     const [error, setError] = useState('');
     // console.log(currentWorkspace);
 
@@ -96,8 +96,9 @@ const AddTaskForm = ({ status, workspaceUsers }) => {
                             value={assignedTo}
                             onChange={(e) => setAssignedTo(e.target.value)}
                         /> */}
-                        <select value={assignedTo} onChange={(e) => setAssignedTo( e.target.value)}>
-                            {workspaceUsers ? workspaceUsers.map((user) => <option value={user.username}>{user.username}</option>) : ''}
+                        <select value={assignedTo} onChange={(e) => setAssignedTo( e.target.value)} required>
+                        <option value="" disabled default>Select a user</option>
+                            {workspaceUsers ? workspaceUsers.map((user, i) => <option value={user.username}>{user.username}</option>) : ''}
                         </select>
 
                         <button className="btn" type="submit" >Create Task</button>
