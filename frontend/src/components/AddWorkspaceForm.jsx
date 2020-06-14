@@ -61,7 +61,7 @@ const AddWorkspaceForm = ({ isDashboard }) => {
             })
         }));
 
-        const data = await response.json();
+        const data = await trackPromise(response.json());
         if (response.ok) {
             toggleModal();
             dispatch(addWorkspace(data));
