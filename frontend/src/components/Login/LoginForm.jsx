@@ -4,6 +4,8 @@ import { config } from '../../config';
 import { authorize, setAuthData } from '../../redux/auth_actions';
 import { useHistory } from 'react-router-dom';
 import useCheckAuth from '../../helpers/checkAuth';
+import { trackPromise } from 'react-promise-tracker';
+
 
 
 const LoginForm = () => {
@@ -21,7 +23,7 @@ const LoginForm = () => {
         if (!password || !email) {
             setError('Please enter both email and password')
         } else {
-            fetch(`${config.apiURL}/users/login`, {
+            trackPromise(fetch(`${config.apiURL}/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,7 +47,7 @@ const LoginForm = () => {
                 })
                 .catch((_) => {
                     setError('Invalid Credentials');
-                })
+                }));
         }
 
     }

@@ -3,6 +3,8 @@ import Modal from 'react-modal';
 import '../styles/ModalForm.css';
 import { config } from '../config'
 import { useSelector } from 'react-redux';
+import { trackPromise } from 'react-promise-tracker';
+
 
 const AddTaskForm = ({ status }) => {
     const authData = useSelector((state) => state.authReducer.authData);
@@ -37,14 +39,14 @@ const AddTaskForm = ({ status }) => {
             // Adding that task using taskId to the active workspace
             const data = await response.json();
             console.log(JSON.stringify({ workspaceID: currentWorkspace._id, taskID: data._id }));
-            const addTaskToWorkspaceResponse = await fetch(`${config.apiURL}/workspace/workspaceTask`, {
+            const addTaskToWorkspaceResponse = await trackPromise(fetch(`${config.apiURL}/workspace/workspaceTask`, {
                 'method': 'PATCH',
                 headers: {
                     'Authorization': 'Bearer ' + authData.value.token,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ workspaceID: currentWorkspace._id, taskID: data._id })
-            });
+            }));
             if (addTaskToWorkspaceResponse.ok) {
                 console.log('Task added successfully');
                 window.location.reload();

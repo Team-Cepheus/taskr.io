@@ -4,7 +4,7 @@ import { setAuthData, authorize} from '../redux/auth_actions';
 import { useHistory } from "react-router-dom";
 
 const useCheckAuth = () => {
-    console.log('checkauth ran');
+    // console.log('checkauth ran');
     const authorized = useSelector((state) => state.authenticated);
     const dispatch = useDispatch();
     const history = useHistory();

@@ -3,6 +3,8 @@ import { config } from '../../config';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { authorize, setAuthData } from '../../redux/auth_actions';
+import { trackPromise } from 'react-promise-tracker';
+
 
 
 const SignupForm = () => {
@@ -20,13 +22,13 @@ const SignupForm = () => {
             setError('Password should be 6 or more characters long')
         } else {
             try {
-                const response = await fetch(`${config.apiURL}/users`, {
+                const response = await trackPromise(fetch(`${config.apiURL}/users`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ email, password, name, username })
-                })
+                }));
 
                 const data = await response.json();
                 if (!response.ok) {
