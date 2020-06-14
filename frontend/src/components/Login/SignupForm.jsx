@@ -29,11 +29,12 @@ const SignupForm = () => {
                 })
 
                 const data = await response.json();
-
-                if (data.message) {
-                    throw new Error(data.message)
-                } else if( data.error.message) {
-                    throw new Error('Password cannot contain "password"')
+                if (!response.ok) {
+                    if (data.message) {
+                        throw new Error(data.message)
+                    } else if (data.error.message) {
+                        throw new Error('Password cannot contain "password"')
+                    }
                 }
 
                 console.log(data)

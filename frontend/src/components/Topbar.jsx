@@ -11,7 +11,7 @@ const Topbar = ({ users }) => {
                 <h1 className="title-brand">taskr. <span>io</span> </h1>
             </div>
             <div className="greeting">
-                <h2>Hello, { authData.value ? authData.value.user.username : ''}</h2>
+                <h2>Hello, { authData.value ? authData.value.user ? authData.value.user.username: '' : ''}</h2>
             </div>
             <div className="users">
                 { users && <span className="users-info">Users in this workspace: </span> }

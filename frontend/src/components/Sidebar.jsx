@@ -42,9 +42,9 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="profile">
-                <img className="avatar" src={`/static/avatars/${Math.ceil(Math.random() *5)}.png`} alt="" />
-                <h3>{userData !== undefined ? userData.value ? userData.value.user.name : '' : ''}</h3>
-                <p>{userData !== undefined ? userData.value ? userData.value.user.email : '' : ''}</p>
+                <img className="avatar" src={`/static/avatars/${Math.ceil(Math.random() * 5)}.png`} alt="" />
+                <h3>{userData !== undefined && userData.value ? userData.value.user ? userData.value.user.name : '' : ''}</h3>
+                <p>{userData !== undefined && userData.value ? userData.value.user ? userData.value.user.email : '' : ''}</p>
             </div>
             <div className="workspaces">
                 <div>
