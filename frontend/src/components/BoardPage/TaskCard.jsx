@@ -4,6 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { config } from '../../config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTodoTasks, setPendingTasks, setDoneTasks } from '../../redux/user_actions';
+import { trackPromise } from 'react-promise-tracker';
 
 
 const TaskCard = ({ id, data, index }) => {
@@ -15,14 +16,14 @@ const TaskCard = ({ id, data, index }) => {
 
     const onClick = async () => {
         if (authData) {
-            const response = await fetch(`${config.apiURL}/task/${data._id}`, {
+            const response = await trackPromise(fetch(`${config.apiURL}/task/${data._id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': 'Bearer ' + authData.value.token,
                     'Content-Type': 'application/json'
 
                 },
-            });
+            }));
             console.log(response);
             if (response.ok) {
                 const newTasks = taskList.filter((task) => task._id !== data._id);

@@ -99,7 +99,7 @@ const AddWorkspaceForm = ({ isDashboard }) => {
                             required
                         />
                         <div>
-                            <label htmlFor="assignTo">Assign Task to</label>
+                            <label htmlFor="assignTo">Add Members to the workspace</label>
                             <button className="add-btn add-input" type="button" onClick={() => handleAdd()}>
                                 +
                         </button>
