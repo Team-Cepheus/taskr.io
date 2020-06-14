@@ -6,13 +6,13 @@ import { useSelector } from 'react-redux';
 import { trackPromise } from 'react-promise-tracker';
 
 
-const AddTaskForm = ({ status }) => {
+const AddTaskForm = ({ status, workspaceUsers }) => {
     const authData = useSelector((state) => state.authReducer.authData);
     const currentWorkspace = useSelector((state) => state.userReducer.workspaces[state.userReducer.currentWorkspaceIndex])
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [assignedTo, setAssignedTo] = useState('');
+    const [assignedTo, setAssignedTo] = useState({value : null});
     const [error, setError] = useState('');
     // console.log(currentWorkspace);
 
@@ -23,6 +23,7 @@ const AddTaskForm = ({ status }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        console.log(assignedTo);
         // Creating a task on the backend 
         const response = await fetch(`${config.apiURL}/task`, {
             'method': 'POST',
@@ -90,11 +91,15 @@ const AddTaskForm = ({ status }) => {
                         >
                         </textarea>
                         <label htmlFor="assignTo">Assign Task to</label>
-                        <input type="text" id="assignTo" placeholder="Enter username for the user"
+                        {/* <input type="text" id="assignTo" placeholder="Enter username for the user"
                             required
                             value={assignedTo}
                             onChange={(e) => setAssignedTo(e.target.value)}
-                        />
+                        /> */}
+                        <select value={assignedTo} onChange={(e) => setAssignedTo( e.target.value)}>
+                            {workspaceUsers ? workspaceUsers.map((user) => <option value={user.username}>{user.username}</option>) : ''}
+                        </select>
+
                         <button className="btn" type="submit" >Create Task</button>
                     </form>
                     {error && <p className="error text">{error}</p>}

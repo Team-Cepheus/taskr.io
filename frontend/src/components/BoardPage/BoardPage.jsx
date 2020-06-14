@@ -91,9 +91,9 @@ const BoardPage = () => {
             <Sidebar />
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className="board">
-                    <TodoColumn todo={todo} />
-                    <InProgressColumn pending={pending} />
-                    <CompletedColumn done={done} />
+                    <TodoColumn todo={todo}  workspaceUsers={workspaceData ? workspaceData.users : undefined}/>
+                    <InProgressColumn pending={pending} workspaceUsers={workspaceData ? workspaceData.users : undefined} />
+                    <CompletedColumn done={done} workspaceUsers={workspaceData ? workspaceData.users : undefined} />
                     <ErrorModal error={error} />
                 </div>
             </DragDropContext>
