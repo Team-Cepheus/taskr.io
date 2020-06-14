@@ -52,7 +52,6 @@ router.post('/',(req, res, next) => {
             // console.log(result)
             const token = user.generateAuthToken();
             res.status(201).json({
-                message: 'Successfully Created a User',
                 createdUser: result,
                 Token : token
             });
