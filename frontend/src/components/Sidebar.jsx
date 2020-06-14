@@ -22,7 +22,6 @@ const Sidebar = () => {
         if (workspaceData && workspaceData.length !== 0) {
             console.log('workspace data' + workspaceData);
             dispatch(setWorkspaces(workspaceData));
-            dispatch(setCurrentWorkspaceIndex(0));
             history.push('/board');
         }
     }, [workspaceData, history, dispatch]);
