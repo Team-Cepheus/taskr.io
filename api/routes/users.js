@@ -52,8 +52,8 @@ router.post('/',(req, res, next) => {
             // console.log(result)
             const token = user.generateAuthToken();
             res.status(201).json({
-                createdUser: result,
-                Token : token
+                user : result,
+                token : token
             });
         })
         .catch(err => {
