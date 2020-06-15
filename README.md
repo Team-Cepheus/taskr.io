@@ -1,6 +1,6 @@
 # taskr.io
 A minimal Kanban Web App made for the Orientation Project at [Hack Your Own](http://www.hackyourown.org/)
-Visit our Project [Here](https://kanbantry.000webhostapp.com/)
+<br /> Visit our Project [Here](https://kanbantry.000webhostapp.com/)
 
 ## Installation
 *Running the server locally*
