@@ -1,9 +1,9 @@
 # taskr.io
-A minimal Kanban web app
+A minimal Kanban Web App made for the Orientation Project at [Hack Your Own](http://www.hackyourown.org/)
 
 ## Installation
-
 *Running the server locally*
+
 Change `frontend/src/config.js` url to `localhost:3001` or use the hosted url and skip to client setup
 
 In the root directory do 
