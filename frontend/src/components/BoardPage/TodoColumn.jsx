@@ -3,14 +3,14 @@ import AddTaskForm from '../AddTaskForm';
 import { Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard'
 
-const TodoColumn = ({ todo }) => {
+const TodoColumn = ({ todo, workspaceUsers }) => {
     console.log(todo);
     return (
 
         <div className="todocol">
             <div className="add-task">
                 <h3>TO-DO</h3>
-                <AddTaskForm status={"todo"} />
+                <AddTaskForm status={"todo"} workspaceUsers={workspaceUsers} />
             </div>
             <div className="rule todo"></div>
             <Droppable droppableId="todoTasks">

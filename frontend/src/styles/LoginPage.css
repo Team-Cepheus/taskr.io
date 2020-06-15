@@ -60,7 +60,7 @@
     /* box-shadow: none; */
     border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 0.5rem 0.5rem 0.25rem 0;
+    padding: 0.5rem 0.5rem 0.25rem 0.5rem;
     letter-spacing: 0.05em;
     background-color: transparent;
 }
@@ -80,6 +80,7 @@
 
  .btn {
     background-color: #0D7377 ;
+    color: #ffffffd5;
     font-weight: bold;
     border: none !important;
     box-shadow: none;
@@ -89,10 +90,21 @@
     outline: none;
 }
 
+.btn:hover {
+    color: white;
+}
+
+
+.btn:active{
+    color: #ffffffd5;
+}
+
 .active{
     background-color: #25262E !important;
 }
 
 .error-text {
-    color: #D72323;
+    color: #fa3636;
 }
+
+

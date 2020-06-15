@@ -3,7 +3,6 @@ const localStorageData = window.localStorage.getItem('auth');
 const authDefaultState = {
     authenticated: false,
     authData: localStorageData ? JSON.parse(localStorageData) : '',
-    isLoading: true
 }
 
 const authReducer = (state = authDefaultState, action) => {

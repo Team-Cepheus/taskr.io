@@ -3,7 +3,8 @@ import Modal from 'react-modal';
 import '../styles/ModalForm.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { config } from '../config'
-import { addWorkspace } from '../redux/user_actions';
+import { addWorkspace, setError } from '../redux/user_actions';
+import { trackPromise } from 'react-promise-tracker';
 
 
 
@@ -44,24 +45,34 @@ const AddWorkspaceForm = ({ isDashboard }) => {
         e.preventDefault();
         const usernames = fields.map(field => field.username);
         console.log(JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user.username, ...usernames], tasks: [] }))
-        console.log(authData.value);
-        const response = await fetch(`${config.apiURL}/workspace`, {
+        // console.log(authData.value);
+        const response = await trackPromise(fetch(`${config.apiURL}/workspace`, {
             'method': 'POST',
             headers: {
                 'Authorization': 'Bearer ' + authData.value.token,
                 'Content-Type': 'application/json',
 
             },
-            body: JSON.stringify({ name: title, admin: authData.value.user.username, users: [authData.value.user.username, ...usernames], tasks: [] })
-        })
-        const data = await response.json()
-        if(response.ok) {
-            dispatch(addWorkspace(data));
-        }
-        // toggleModal();
-        // window.location.reload();
-    }
+            body: JSON.stringify({ 
+                name: title, 
+                admin: authData.value.user.username, 
+                users: [authData.value.user.username, ...usernames].filter((value) => value!=null ), 
+                tasks: [] 
+            })
+        }));
 
+        const data = await trackPromise(response.json());
+        if (response.ok) {
+            toggleModal();
+            dispatch(addWorkspace(data));
+            console.log(response);
+            window.location.reload();
+        } else if ( !response.ok){
+            dispatch(setError('Username(s) not found! Make sure all usernames are correct'));
+            console.log('error set');
+        }
+    
+    }
 
     return (
         <>
@@ -88,7 +99,7 @@ const AddWorkspaceForm = ({ isDashboard }) => {
                             required
                         />
                         <div>
-                            <label htmlFor="assignTo">Assign Task to</label>
+                            <label htmlFor="assignTo">Add Members to the workspace</label>
                             <button className="add-btn add-input" type="button" onClick={() => handleAdd()}>
                                 +
                         </button>

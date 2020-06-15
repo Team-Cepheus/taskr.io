@@ -65,5 +65,13 @@
 }
 
 .comp{
-    background: #14FFEC;
+    background: #16d97e;
+}
+
+select {
+    background-color: #2F3039;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    margin-top: 0.1rem;
 }

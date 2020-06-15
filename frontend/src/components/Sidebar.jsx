@@ -22,7 +22,6 @@ const Sidebar = () => {
         if (workspaceData && workspaceData.length !== 0) {
             console.log('workspace data' + workspaceData);
             dispatch(setWorkspaces(workspaceData));
-            dispatch(setCurrentWorkspaceIndex(0));
             history.push('/board');
         }
     }, [workspaceData, history, dispatch]);
@@ -43,9 +42,9 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="profile">
-                <img className="avatar" src="/static/avatars/2.png" alt="" />
-                <h3>{userData !== undefined ? userData.value ? userData.value.user.name : '' : ''}</h3>
-                <p>{userData !== undefined ? userData.value ? userData.value.user.email : '' : ''}</p>
+                <img className="avatar" src={`/static/avatars/${Math.ceil(Math.random() * 5)}.png`} alt="" />
+                <h3>{userData !== undefined && userData.value ? userData.value.user ? userData.value.user.name : '' : ''}</h3>
+                <p>{userData !== undefined && userData.value ? userData.value.user ? userData.value.user.email : '' : ''}</p>
             </div>
             <div className="workspaces">
                 <div>

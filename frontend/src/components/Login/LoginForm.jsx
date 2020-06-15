@@ -4,23 +4,26 @@ import { config } from '../../config';
 import { authorize, setAuthData } from '../../redux/auth_actions';
 import { useHistory } from 'react-router-dom';
 import useCheckAuth from '../../helpers/checkAuth';
+import { trackPromise } from 'react-promise-tracker';
+
+
 
 const LoginForm = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    useCheckAuth()
+    useCheckAuth();
 
     const onSubmit = (e) => {
         e.preventDefault();
         if (!password || !email) {
             setError('Please enter both email and password')
         } else {
-            fetch(`${config.apiURL}/users/login`, {
+            trackPromise(fetch(`${config.apiURL}/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +37,7 @@ const LoginForm = () => {
                     return resp.json();
                 })
                 .then((data) => {
-                    console.log(data)
+                    // console.log(data)
                     window.localStorage.setItem('auth', JSON.stringify({
                         value: data,
                     }));
@@ -44,7 +47,7 @@ const LoginForm = () => {
                 })
                 .catch((_) => {
                     setError('Invalid Credentials');
-                })
+                }));
         }
 
     }

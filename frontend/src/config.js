@@ -1,3 +1,3 @@
 export const config =  {
-    apiURL: 'http://kanban99.herokuapp.com'
+    apiURL: 'https://kanban99.herokuapp.com'
 }

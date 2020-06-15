@@ -3,13 +3,13 @@ import AddTaskForm from '../AddTaskForm';
 import { Droppable } from 'react-beautiful-dnd';
 import TaskCard from './TaskCard';
 
-const InProgressColumn = ({ pending }) => {
+const InProgressColumn = ({ pending, workspaceUsers }) => {
     console.log(pending);
     return (
         <div className="inprogresscol">
             <div className="add-task">
                 <h3>IN PROGRESS</h3>
-                <AddTaskForm status={"pending"}/>
+                <AddTaskForm status={"pending"} workspaceUsers={workspaceUsers}/>
             </div>
             <div className="rule inprog"></div>
             <Droppable droppableId="pendingTasks">

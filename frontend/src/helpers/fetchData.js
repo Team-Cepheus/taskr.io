@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { config } from '../config';
-
+import { trackPromise } from 'react-promise-tracker';
 
 const useFetchData = (url, method) => {
     const abortController = new AbortController();
@@ -13,7 +13,7 @@ const useFetchData = (url, method) => {
         const fetchData = async (url, method, token) => {
             try {
 
-                const response = await fetch(`${config.apiURL}/${url}`, {
+                const response = await trackPromise(fetch(`${config.apiURL}/${url}`, {
                     signal: abortController.signal,
                     method: method,
                     headers: {
@@ -21,7 +21,7 @@ const useFetchData = (url, method) => {
                         'Content-Type': 'application/json'
 
                     },
-                });
+                }));
                 const data = await response.json();
                 console.log(data);
                 if (!response.ok) {
