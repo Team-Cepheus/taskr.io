@@ -2,6 +2,7 @@
 A minimal Kanban web app
 
 ## Installation
+
 In the root directory do 
 ```
 npm install 
@@ -14,3 +15,4 @@ npm run startdev
 npm install 
 npm start
 ```
+<video src="github-demo.mp4"></video>
